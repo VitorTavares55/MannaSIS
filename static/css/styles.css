@@ -83,8 +83,8 @@ body {
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
   color: var(--bs-body-color);
+  background-color: var(--bs-body-color);
   text-align: var(--bs-body-text-align);
-  background-color: var(--bs-body-bg);
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -7344,6 +7344,12 @@ textarea.form-control-lg {
   margin-top: auto !important;
 }
 
+.mt-auto-2 {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
 .me-0 {
   margin-right: 0 !important;
 }
@@ -11706,4 +11712,18 @@ body {
   border-top: 5px solid #636464;
   border-left: 5px solid #636464;
   border-bottom: 5px solid #636464;
+}
+
+.round-logo{
+  border-color: #000;
+  border-radius: 10px;
+  margin: auto;
+  display: block;
+  margin-bottom: 10%;
+  height: 200px;
+  width: 200px;
+}
+
+.btn-login{
+  margin-top: 5%;
 }
