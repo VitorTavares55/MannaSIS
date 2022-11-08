@@ -8,29 +8,31 @@
       <div class="row">
 <!-- Header -->
 <header class="bg-primary text-center py-5 mb-4">
-    <div class="container">
-      <h1 class="fw-light text-white">Membros</h1>
-    </div>
-  </header>
-  
-  <!-- Page Content -->
   <div class="container">
-    <div class="row">
-      <!-- Team Member 1 -->
-      <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-0 shadow">
-          <img src="https://source.unsplash.com/TMgQMXoglsM/500x350" class="card-img-top" alt="...">
-          <div class="card-body text-center">
-        {% for member in object_list %}
-        <h5 class="card-title mb-0">{{member.name}}</h5>
-        <div class="card-text text-black-50">{{member.identification}}</div>
-        {% endfor %}
-          </div>
+    <h1 class="fw-light text-white">Membros</h1>
+  </div>
+</header>
+
+<!-- Page Content -->
+<div class="container">
+  <div class="row">
+    <!-- Team Member 1 -->
+    {% for member in object_list %}
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-0 shadow">
+        <img src="{{member.photo}}" width= "200" height="200" class="card-img-top" alt="...">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">{{member.name}}</h5>
+          <div class="card-text text-black-50">Web Developer</div>
         </div>
       </div>
-    <!-- /.row -->
+    </div>
+    {% endfor %}
   </div>
-  <!-- /.container -->
+  <!-- /.row -->
+
+</div>
+<!-- /.container -->
 </div>
 </div>
 </section>
