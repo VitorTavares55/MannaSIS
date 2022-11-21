@@ -21,3 +21,6 @@ class MemberList(ListView):
 	model = Member
 	template_name = 'pages/member-list.html'
 	#success_url = reverse_lazy('index')
+
+class MemberView(TemplateView):
+	template_name = 'pages/member-profile.html'
