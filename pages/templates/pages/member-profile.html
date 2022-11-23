@@ -11,13 +11,13 @@
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                    <img src="{{member.foto}}" class="rounded-circle" width="150">
                     <div class="mt-3">
-                      <h4>Vitor Tavares de Oliveira</h4>
-                      <p class="text-secondary mb-1">Pesquisador(a)</p>
-                      <p class="text-secondary mb-1">N°233</p>
-                      <p class="text-secondary mb-1">Bolsa de Iniciação Científica</p>
-                      <p class="text-muted font-size-sm">IFPR - Campus Paranavaí</p>
+                      <h4>{{member.nome}}</h4>
+                      <p class="text-secondary mb-1">{{member.categoria}}</p>
+                      <p class="text-secondary mb-1">N° {{member.id}}</p>
+                      <p class="text-secondary mb-1">{{member.bolsa}}</p>
+                      <p class="text-muted font-size-sm">{{member.instituicao}}</p>
                     </div>
                   </div>
                 </div>
@@ -26,19 +26,15 @@
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 class="mb-0" data-feather="mail"></h6>
-                    <span class="text-secondary">vitortavares.o55@gmail.com</span>
+                    <span class="text-secondary">{{member.email}}</span>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 class="mb-0" data-feather="smartphone"></h6>
-                    <span class="text-secondary">bootdey</span>
+                    <span class="text-secondary">{{member.fone}}</span>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                     <h6 class="mb-0" data-feather="github"></h6>
-                    <span class="text-secondary">@bootdey</span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                    <h6 class="mb-0" data-feather="instagram"></h6>
-                    <span class="text-secondary">bootdey</span>
+                    <span class="text-secondary">{{member.git}}</span>
                   </li>
                 </ul>
               </div>
@@ -51,7 +47,7 @@
                       <h6 class="mb-0">CPF</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      121.604.429-50
+                      {{member.cpf}}
                     </div>
                   </div>
                   <hr>
@@ -60,7 +56,7 @@
                       <h6 class="mb-0">RG</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      14.522.738-0
+                      {{member.rg}}
                     </div>
                   </div>
                   <hr>
@@ -69,7 +65,7 @@
                       <h6 class="mb-0">Sexo</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Masculino
+                      {{member.sexo}}
                     </div>
                   </div>
                   <hr>
@@ -78,7 +74,7 @@
                       <h6 class="mb-0">Formação</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Técnico Profissionalizante
+                      {{member.formacao}}
                     </div>
                   </div>
                   <hr>
@@ -87,7 +83,7 @@
                       <h6 class="mb-0">Data de Nascimento</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      04 de Março de 2003
+                     {{member.dtnasc}}
                     </div>
                   </div>
                   <hr>
@@ -96,7 +92,7 @@
                       <h6 class="mb-0">Endereço</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Av. General Andrade Neves - 577, Paranavaí
+                      {{member.endereco}}
                     </div>
                   </div>
                   <hr>
@@ -105,7 +101,7 @@
                       <h6 class="mb-0">Projeto</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      MannaSIS - Sistema de Gerenciamento do Manna
+                      {{member.projeto}}
                     </div>
                   </div>
                   <hr>
@@ -114,7 +110,7 @@
                       <h6 class="mb-0">Prêmios</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Menção Honrosa
+                    {{member.premio}}
                     </div>
                   </div>
                   <hr>
@@ -131,7 +127,7 @@
                       <h6 class="mb-0">Nome do Banco</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Banco do Brasil
+                      {{member.nomeBanco}}
                     </div>
                   </div>
                   <div class="row">
@@ -139,7 +135,7 @@
                       <h6 class="mb-0">Numero do Banco</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      01
+                      {{member.numeroBanco}}
                     </div>
                   </div>
                   <div class="row">
@@ -147,7 +143,7 @@
                       <h6 class="mb-0">Numero da Agência</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      01
+                      {{member.numeroAgencia}}
                     </div>
                   </div>
                   <div class="row">
@@ -155,7 +151,7 @@
                       <h6 class="mb-0">Numero da Conta</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      01
+                      {{member.numeroConta}}
                     </div>
                   </div>
                   <hr>

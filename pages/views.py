@@ -5,7 +5,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Member
 from django import forms
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 
 # Create your views here.
 
@@ -24,3 +24,8 @@ class MemberList(ListView):
 
 class MemberView(TemplateView):
 	template_name = 'pages/member-profile.html'
+
+
+def memberprofile(request, member_id):
+    get=get_object_or_404(Member, pk=member_id) 
+    return render(request,'pages/member-profile.html',{'member': get})
