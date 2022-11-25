@@ -16,7 +16,7 @@ class Member(models.Model):
     rg = models.CharField('RG', max_length=50)
     sexo = models.CharField('Sexo', max_length=50)
     formacao = models.CharField('Formação', max_length=50)
-    dtnasc = models.DateField('Data de Nascimento')
+    dtnasc = models.CharField('Data de Nascimento', max_length=50)
     endereco = models.CharField('Endereço', max_length=50)
     projeto = models.CharField('Projeto Associado', max_length=50)
     premio = models.CharField('Prêmio Associado', max_length=50)
