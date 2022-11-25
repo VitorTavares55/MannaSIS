@@ -6,6 +6,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Member
 from django import forms
 from django.shortcuts import get_object_or_404, render
+from .forms import MemberForm
 
 # Create your views here.
 
@@ -29,3 +30,12 @@ class MemberView(TemplateView):
 def memberprofile(request, member_id):
     get=get_object_or_404(Member, pk=member_id) 
     return render(request,'pages/member-profile.html',{'member': get})
+
+def membercreate(request):
+	context = {'form' : MemberForm()}
+	return render(request, 'pages/form.html', context)
+
+class MemberCreate(CreateView):
+	model = Member
+	fields = ['foto', 'nome', 'categoria', 'bolsa', 'instituicao', 'email', 'fone', 'git', 'cpf', 'rg', 'sexo', 'formacao', 'dtnasc', 'endereco', 'projeto', 'premio', 'nomeBanco', 'numeroBanco', 'numeroAgencia', 'numeroConta', 'termoCompromisso']
+	template_name = 'pages/form.html'
