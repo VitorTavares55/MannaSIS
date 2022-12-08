@@ -10,6 +10,4 @@ urlpatterns = [
     path('membros', MemberList.as_view(), name="membros"),
     path('membro/<member_id>', views.memberprofile, name="membro"),
     path('cadastro-membro', MemberCreate.as_view(), name="teste"),
-
-    path('teste', views.membercreate, name="cadastro-membro"),
 ]
