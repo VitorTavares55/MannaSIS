@@ -4,7 +4,7 @@ from django import forms
 
 # Create your models here.
 class Member(models.Model):
-    foto = models.ImageField('Foto', upload_to='static/uploads/photos')
+    foto = models.ImageField('Foto', upload_to='static/uploads/photos/')
     nome = models.CharField('Nome Completo', max_length=50)
     categoria = models.CharField('Função',max_length=50)
     bolsa = models.CharField('Tipo de Bolsa', max_length=100)
@@ -24,7 +24,7 @@ class Member(models.Model):
     numeroBanco = models.CharField('Número do Banco', max_length=50)
     numeroAgencia = models.CharField('Número da Agência', max_length=50)
     numeroConta = models.CharField('Número da Conta', max_length=50)
-    termoCompromisso = models.FileField('Termo de Compromisso', upload_to='static/uploads/termos')
+    termoCompromisso = models.FileField('Termo de Compromisso', upload_to='static/uploads/termos/')
     acesso = models.CharField(max_length=50)
 
     def __str__(self):
