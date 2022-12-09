@@ -11,4 +11,5 @@ urlpatterns = [
     path('membro/<member_id>', views.memberprofile, name="membro"),
     path('cadastro-membro', MemberCreate.as_view(), name="cadastro-membro"),
     path('editar-membro/<int:pk>/', MemberUpdate.as_view(), name="editar-membro"),
+    path('deletar-membro/<int:pk>/', MemberDelete.as_view(), name="deletar-membro"),
 ]
