@@ -35,3 +35,16 @@ class MemberCreate(CreateView):
     form_class = CustomMemberForm
     template_name = 'pages/form.html'
     model = Member
+    success_url = reverse_lazy('membros')
+
+class MemberUpdate(UpdateView):
+    form_class = CustomMemberForm
+    template_name = 'pages/form.html'
+    model = Member
+    success_url = reverse_lazy('membros')
+
+class MemberDelete(DeleteView):
+    template_name = 'pages/delete.html'
+    model = Member
+    success_url = reverse_lazy('membros')
+

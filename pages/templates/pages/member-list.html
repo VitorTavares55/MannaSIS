@@ -17,7 +17,18 @@
 <div class="container">
   <div class="row">
     <!-- Team Member 1 -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-0 shadow">
+        <a href="{% url 'cadastro-membro' %}">
+        <img src="{% static 'img/plus.png' %}" width= "200" height="200" class="card-img-top" alt="..."></a>
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">Adcionar</h5>
+          <div class="card-text text-black-50">Novo Membro</div>
+        </div>
+      </div>
+    </div>
     {% for member in object_list %}
+    {% if member.ativo == True %}
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-0 shadow">
         <a href="{% url 'membro' member.id %}">
@@ -28,7 +39,7 @@
         </div>
       </div>
     </div>
-
+    {% endif %}
     {% endfor %}
   </div>
   <!-- /.row -->
