@@ -43,3 +43,8 @@ class MemberUpdate(UpdateView):
     model = Member
     success_url = reverse_lazy('membros')
 
+class MemberDelete(DeleteView):
+    template_name = 'pages/delete.html'
+    model = Member
+    success_url = reverse_lazy('membros')
+
