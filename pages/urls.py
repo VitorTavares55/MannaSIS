@@ -9,5 +9,6 @@ urlpatterns = [
 
     path('membros', MemberList.as_view(), name="membros"),
     path('membro/<member_id>', views.memberprofile, name="membro"),
-    path('cadastro-membro', MemberCreate.as_view(), name="teste"),
+    path('cadastro-membro', MemberCreate.as_view(), name="cadastro-membro"),
+    path('editar-membro/<int:pk>/', MemberUpdate.as_view(), name="editar-membro"),
 ]
