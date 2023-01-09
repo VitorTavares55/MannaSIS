@@ -83,7 +83,7 @@ body {
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
   color: var(--bs-body-color);
-  background-color: var(--bs-body-color);
+  background: url(../img/bg.png);
   text-align: var(--bs-body-text-align);
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -11709,7 +11709,6 @@ body {
 }
 
 .pricing{
-  background-color:#010032;
 }
 
 .round-logo{
