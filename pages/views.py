@@ -26,9 +26,9 @@ class MemberList(ListView):
 class MemberView(TemplateView):
 	template_name = 'pages/member-profile.html'
 
-
-def memberprofile(request, member_id):
-    get=get_object_or_404(Member, pk=member_id) 
+    
+def memberprofile(request, member_nome):
+    get=get_object_or_404(Member, nome=member_nome) 
     return render(request,'pages/member-profile.html',{'member': get})
 
 class MemberCreate(CreateView):

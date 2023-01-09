@@ -6,9 +6,9 @@ from .models import Member
 class CustomMemberForm(forms.ModelForm):
     class Meta:
         model = Member
-        fields = ['foto', 'nome', 'categoria', 'bolsa', 'instituicao', 'email', 'fone', 'git', 'cpf', 'rg', 'sexo', 'formacao', 'dtnasc', 'endereco', 'projeto', 'premio', 'nomeBanco', 'numeroBanco', 'numeroAgencia', 'numeroConta', 'termoCompromisso']
+        fields = ['foto', 'nome', 'categoria', 'bolsa', 'instituicao', 'email', 'fone', 'git', 'cpf', 'rg', 'sexo', 'formacao', 'dtnasc', 'endereco', 'projeto', 'premio', 'nomeBanco', 'numeroBanco', 'numeroAgencia', 'numeroConta', 'termoCompromisso', 'termoCiencia', 'planoTrabalho']
         widgets = {
-            "dtnasc": forms.DateInput(attrs={'class':'form-control', 'type':'date'})
+            "dtnasc": forms.TextInput(attrs={'class':'form-control', 'type':'date'})
         }
 
 

@@ -6,9 +6,8 @@ from . import views
 urlpatterns = [
     path('', IndexView.as_view(), name="index"),
     path('login', LoginView.as_view(), name="login"),
-
     path('membros', MemberList.as_view(), name="membros"),
-    path('membro/<member_id>', views.memberprofile, name="membro"),
+    path('<member_nome>', views.memberprofile, name="membro"),
     path('cadastro-membro', MemberCreate.as_view(), name="cadastro-membro"),
     path('editar-membro/<int:pk>/', MemberUpdate.as_view(), name="editar-membro"),
     path('deletar-membro/<int:pk>/', MemberDelete.as_view(), name="deletar-membro"),

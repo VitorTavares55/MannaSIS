@@ -3,50 +3,114 @@
 {% load static %}
 
 {% block content %}
+<script src="https://unpkg.com/feather-icons"></script>
 <section class="pricing py-5">
-    <div class="container">
-      <div class="row">
-<!-- Header -->
-<header class="bg-primary text-center py-5 mb-4">
-  <div class="container">
-    <h1 class="fw-light text-white">Membros</h1>
-  </div>
-</header>
-
-<!-- Page Content -->
 <div class="container">
   <div class="row">
-    <!-- Team Member 1 -->
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-0 shadow">
-        <a href="{% url 'cadastro-membro' %}">
-        <img src="{% static 'img/plus.png' %}" width= "200" height="200" class="card-img-top" alt="..."></a>
-        <div class="card-body text-center">
-          <h5 class="card-title mb-0">Adcionar</h5>
-          <div class="card-text text-black-50">Novo Membro</div>
-        </div>
-      </div>
+  <!-- Header -->
+  <div class="card mb-4 bg-primary">
+  <header class="bg-primary text-center py-2 mb-2">
+    <div class="container">
+      <h1 class="fw-light text-white">Membros</h1>
     </div>
-    {% for member in object_list %}
-    {% if member.ativo == True %}
-    <div class="col-xl-3 col-md-6 mb-4">
-      <div class="card border-0 shadow">
-        <a href="{% url 'membro' member.id %}">
-        <img src="{{member.foto}}" width= "200" height="200" class="card-img-top" alt="..."></a>
-        <div class="card-body text-center">
-          <h5 class="card-title mb-0">{{member.nome}}</h5>
-          <div class="card-text text-black-50">{{member.categoria}}</div>
-        </div>
-      </div>
-    </div>
-    {% endif %}
-    {% endfor %}
+  </header>
   </div>
-  <!-- /.row -->
 
-</div>
-<!-- /.container -->
-</div>
+  <!-- Search -->
+  <div id="content">
+    <form class='form-inline'>
+      <div class="input-group">
+        <input type='text' id='search' class="form-control search-form " placeholder="Filtrar Membros ...">
+        <span class="input-group-btn" style="width:39px">
+          <button id="search-this"type="button" class="pull-right btn btn-default search-btn">
+              <i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+
+  <!-- Page Content -->
+  <div class="card mb-4 bg-white">
+  <div class="container">
+    <div class="row">
+      <table class="table align-middle mb-0 bg-white">
+        <thead class="bg-white">
+          <tr>
+            <th>Nome</th>
+            <th>Função</th>
+            <th>Instituição</th>
+            <th>Bolsa</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center">
+                <img
+                    src="{% static 'img/plus.png' %}"
+                    alt=""
+                    style="width: 45px; height: 45px"
+                    class="rounded-circle"
+                    />
+                <div class="ms-3">
+                  <a href="{% url 'cadastro-membro' %}">
+                  <p class="fw-bold mb-1">Novo Membro</p>
+                  <p class="text-muted mb-0">Cadastrar Novo Membro</p></a>
+                </div>
+              </div>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td></td>
+            <td>
+            </td>
+          </tr>
+          {% for member in object_list %}
+          {% if member.ativo == True %}
+          <tr>
+            <td>
+              <div class="d-flex align-items-center">
+                <img
+                    src="{{member.foto}}"
+                    alt=""
+                    style="width: 45px; height: 45px"
+                    class="rounded-circle"
+                    />
+                <div class="ms-3">
+                  <p class="fw-bold mb-1">{{member.nome}}</p>
+                  <p class="text-muted mb-0">{{member.email}}</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <p class="fw-normal mb-1">{{member.categoria}}</p>
+            </td>
+            <td>
+              <p class="fw-normal mb-1">{{member.instituicao}}</p>
+            </td>
+            <td>{{member.bolsa}}</td>
+            <td>
+              <a href="{% url 'membro' member.nome %}"><h6 class="mb-0" data-feather="book-open"></h6></a>
+            </td>
+          </tr>
+          {% endif %}
+        {% endfor %}
+        </tbody>
+      </table>
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
+  </div>
+</div> 
+  
+ </div>
 </div>
 </section>
+<script>
+  feather.replace()
+  </script>
         {% endblock %}
