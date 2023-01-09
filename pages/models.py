@@ -13,6 +13,12 @@ class Member(models.Model):
     email = models.CharField('E-mail', max_length=50)
     fone = models.CharField('Celular(Sem pontuação)', max_length=50)
     git = models.CharField('Usuário Git', max_length=50)
+    lattes = models.CharField('Lattes', max_length=50)
+    link = models.CharField('Linkedin', max_length=50)
+    insta = models.CharField('Instagram', max_length=50)
+    twt = models.CharField('Twitter', max_length=50)
+    face = models.CharField('Facebook', max_length=50)
+    youtube = models.CharField('Youtube', max_length=50)
     cpf = models.CharField('CPF(Sem pontuação)', max_length=11, validators=[MinLengthValidator(11)])
     rg = models.CharField('RG(Sem pontuação)', max_length=50)
     sexo = models.CharField('Sexo', max_length=50)
@@ -32,4 +38,4 @@ class Member(models.Model):
     ativo = models.BooleanField(default=True)
 
     def __str__(self):
-        return str(self.foto) + ' - ' + self.nome + ' - ' + self.categoria + ' - ' + self.instituicao + ' - ' + self.email + ' - ' + self.fone + ' - ' + self.git + ' - ' + self.cpf + ' - ' + self.rg + ' - ' + self.sexo + ' - ' + self.formacao + ' - ' + str(self.dtnasc) + ' - ' + self.endereco + ' - ' + self.projeto + ' - ' + self.premio + ' - ' + self.nomeBanco + ' - ' + self.numeroBanco + ' - ' + self.numeroAgencia + ' - ' + self.numeroConta + ' - ' + str(self.termoCompromisso) +  ' - ' + str(self.termoCiencia) +  ' - ' + str(self.planoTrabalho) + ' - ' + self.acesso + ' - ' + str(self.ativo)
+        return str(self.foto) + ' - ' + self.nome + ' - ' + self.categoria + ' - ' + self.instituicao + ' - ' + self.email + ' - ' + self.fone + ' - ' + self.git + ' - ' + self.lattes + ' - ' + self.link + ' - ' + self.insta + ' - ' + self.twt + ' - ' + self.face + ' - ' + self.youtube + ' - ' + self.cpf + ' - ' + self.rg + ' - ' + self.sexo + ' - ' + self.formacao + ' - ' + str(self.dtnasc) + ' - ' + self.endereco + ' - ' + self.projeto + ' - ' + self.premio + ' - ' + self.nomeBanco + ' - ' + self.numeroBanco + ' - ' + self.numeroAgencia + ' - ' + self.numeroConta + ' - ' + str(self.termoCompromisso) +  ' - ' + str(self.termoCiencia) +  ' - ' + str(self.planoTrabalho) + ' - ' + self.acesso + ' - ' + str(self.ativo)
