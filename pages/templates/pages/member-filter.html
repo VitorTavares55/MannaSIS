@@ -19,9 +19,9 @@
   <!-- Search -->
   <div id="content">
     <form class='form-inline' method="POST" action="{% url 'filtro-membro' %}">
-      {% csrf_token %}
+        {% csrf_token %}
       <div class="input-group">
-        <input type='text' name='search' class="form-control search-form " placeholder="Filtrar Membros ...">
+        <input type='text' name='search' class="form-control search-form " placeholder="Filtrar Membros">
         <span class="input-group-btn" style="width:39px">
           <button id="search-this" type="submit" class="pull-right btn btn-default search-btn">
               <i class="fa fa-search"></i>
@@ -46,32 +46,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <div class="d-flex align-items-center">
-                <img
-                    src="{% static 'img/plus.png' %}"
-                    alt=""
-                    style="width: 45px; height: 45px"
-                    class="rounded-circle"
-                    />
-                <div class="ms-3">
-                  <a href="{% url 'cadastro-membro' %}">
-                  <p class="fw-bold mb-1">Novo Membro</p>
-                  <p class="text-muted mb-0">Cadastrar Novo Membro</p></a>
-                </div>
-              </div>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td></td>
-            <td>
-            </td>
-          </tr>
-          {% for member in object_list %}
-          {% if member.ativo == True %}
+          {% for member in result %}
           <tr>
             <td>
               <div class="d-flex align-items-center">
@@ -98,7 +73,7 @@
               <a href="{% url 'membro' member.nome %}"><h6 class="mb-0" data-feather="book-open"></h6></a>
             </td>
           </tr>
-          {% endif %}
+          {% empty %}
         {% endfor %}
         </tbody>
       </table>

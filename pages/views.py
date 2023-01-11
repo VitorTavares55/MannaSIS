@@ -23,10 +23,14 @@ class MemberList(ListView):
 	template_name = 'pages/member-list.html'
 	#success_url = reverse_lazy('index')
 
-class MemberView(TemplateView):
-	template_name = 'pages/member-profile.html'
+def memberfilter(request):
+    if request.method == 'POST':
+        value = request.POST['search']
+        result = Member.objects.filter(nome__contains=value)
+        return render(request, 'pages/member-filter.html', {'result':result})
+    else:
+        return render(request, 'pages/member-list.html', {})
 
-    
 def memberprofile(request, member_nome):
     get=get_object_or_404(Member, nome=member_nome) 
     return render(request,'pages/member-profile.html',{'member': get})
