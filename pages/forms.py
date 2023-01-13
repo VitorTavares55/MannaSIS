@@ -1,7 +1,7 @@
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Div
-from .models import Member
+from .models import Member, Institution
 
 class CustomMemberForm(forms.ModelForm):
     class Meta:
@@ -10,5 +10,10 @@ class CustomMemberForm(forms.ModelForm):
         widgets = {
             "dtnasc": forms.TextInput(attrs={'class':'form-control', 'type':'date'})
         }
+
+class CustomInstitutionForm(forms.ModelForm):
+    class Meta:
+        model = Institution
+        fields = ['foto', 'nome', 'email', 'telefone', 'site', 'hub', 'esfera', 'endereco', 'quantidadeAlunos', 'descricao']
 
 

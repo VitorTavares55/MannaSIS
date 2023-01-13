@@ -11,5 +11,12 @@ urlpatterns = [
     path('editar-membro/<int:pk>/', MemberUpdate.as_view(), name="editar-membro"),
     path('deletar-membro/<int:pk>/', MemberDelete.as_view(), name="deletar-membro"),
     path('filtro-membro', views.memberfilter, name="filtro-membro"),
-    path('<member_nome>', views.memberprofile, name="membro"),
+    path('membro', views.memberprofile, name="membro"),
+
+    path('instituicoes', InstitutionList.as_view(), name="instituicoes"),
+    path('cadastro-instituicao', InstitutionCreate.as_view(), name="cadastro-instituicao"),
+    path('editar-instituicao/<int:pk>/', InstitutionUpdate.as_view(), name="editar-instituicao"),
+    path('deletar-instituicao/<int:pk>/', InstitutionDelete.as_view(), name="deletar-instituicao"),
+    path('filtro-instituicao', views.institutionfilter, name="filtro-instituicao"),
+    path('instituicao', views.institutionprofile, name="instituicao"),
 ]
