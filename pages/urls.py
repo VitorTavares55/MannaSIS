@@ -19,4 +19,11 @@ urlpatterns = [
     path('deletar-instituicao/<int:pk>/', InstitutionDelete.as_view(), name="deletar-instituicao"),
     path('filtro-instituicao', views.institutionfilter, name="filtro-instituicao"),
     path('instituicao', views.institutionprofile, name="instituicao"),
+
+    path('hubs', HubList.as_view(), name="hubs"),
+    path('cadastro-hub', HubCreate.as_view(), name="cadastro-hub"),
+    path('editar-hub/<int:pk>/', HubUpdate.as_view(), name="editar-hub"),
+    path('deletar-hub/<int:pk>/', HubDelete.as_view(), name="deletar-hub"),
+    path('filtro-hub', views.hubfilter, name="filtro-hub"),
+    path('hub', views.hubprofile, name="hub"),
 ]

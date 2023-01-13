@@ -1,7 +1,7 @@
 from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Div
-from .models import Member, Institution
+from .models import *
 
 class CustomMemberForm(forms.ModelForm):
     class Meta:
@@ -15,5 +15,10 @@ class CustomInstitutionForm(forms.ModelForm):
     class Meta:
         model = Institution
         fields = ['foto', 'nome', 'email', 'telefone', 'site', 'hub', 'esfera', 'endereco', 'quantidadeAlunos', 'descricao']
+
+class CustomHubForm(forms.ModelForm):
+    class Meta:
+        model = Hub
+        fields = ['foto', 'nome', 'sede', 'regiao', 'representante', 'instituicoes', 'participantes', 'conexao', 'quantidadeAlunos', 'descricao']
 
 

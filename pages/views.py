@@ -5,8 +5,8 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django import forms
 from django.shortcuts import get_object_or_404, render
-from .models import Member, Institution
-from .forms import CustomMemberForm, CustomInstitutionForm
+from .models import *
+from .forms import *
 
 # Create your views here.
 
@@ -53,6 +53,48 @@ class MemberDelete(DeleteView):
     template_name = 'pages/delete.html'
     model = Member
     success_url = reverse_lazy('membros')
+
+
+
+
+class HubList(ListView):
+	#login_url = reverse_lazy('login')
+	model = Hub
+	template_name = 'pages/hub-list.html'
+	#success_url = reverse_lazy('index')
+
+def hubfilter(request):
+    if request.method == 'POST':
+        value = request.POST['search']
+        result = Hub.objects.filter(nome__contains=value)
+        return render(request, 'pages/hub-filter.html', {'result':result})
+    else:
+        return render(request, 'pages/hub-list.html', {})
+
+def hubprofile(request):
+  if request.method == 'POST':
+        value = request.POST['value']
+        result = Hub.objects.filter(nome__contains=value)
+        return render(request, 'pages/hub-profile.html', {'result':result})
+
+class HubCreate(CreateView):
+    form_class = CustomHubForm
+    template_name = 'pages/form.html'
+    model = Hub
+    success_url = reverse_lazy('hubs')
+
+class HubUpdate(UpdateView):
+    form_class = CustomHubForm
+    template_name = 'pages/form.html'
+    model = Hub
+    success_url = reverse_lazy('hubs')
+
+class HubDelete(DeleteView):
+    template_name = 'pages/delete.html'
+    model = Hub
+    success_url = reverse_lazy('hubs')
+
+
 
 
 

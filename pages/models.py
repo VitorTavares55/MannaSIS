@@ -57,4 +57,19 @@ class Institution(models.Model):
     def __str__(self):
         return str(self.foto) + ' - ' + self.nome + ' - ' + self.email + ' - ' + self.telefone + ' - ' + self.site + ' - ' + self.hub + ' - ' + str(self.esfera) + ' - ' + self.endereco + ' - ' + str(self.quantidadeAlunos) + ' - ' + self.descricao 
 
+class Hub(models.Model):
+    foto = models.ImageField('Foto', upload_to='static/uploads/photos/hub')
+    nome = models.CharField('Nome do Hub', max_length=200)
+    regiao = models.CharField('Região do Hub', max_length=200)
+    sede = models.CharField('Sede do Hub', max_length=50)
+    representante = models.CharField('Representante Manna', max_length=50)
+    instituicoes= models.CharField('Instituições Afiliadas', max_length=50)
+    participantes = models.CharField('Membros Participantes', max_length=50)
+    conexao = models.CharField('Colégios Atendidos', max_length=200)
+    quantidadeAlunos = models.IntegerField('Quantidade de Alunos Atendidos')
+    descricao = models.CharField('Descrição', max_length=2000)
+
+    def __str__(self):
+        return str(self.foto) + ' - ' + self.nome + ' - ' + self.sede + ' - ' + self.representante + ' - ' + self.instituicoes + ' - ' + self.participantes + ' - ' + self.conexao + ' - ' + str(self.quantidadeAlunos) + ' - ' + self.descricao 
+
 
