@@ -5,7 +5,7 @@ from django.core.validators import MinLengthValidator
 from .choices import *
 
 class Hub(models.Model):
-    foto = models.ImageField('Foto', upload_to='static/uploads/photos/hub')
+    foto = models.ImageField('Foto', upload_to='./static/uploads/photos/hub')
     nome = models.CharField('Nome do Hub', max_length=200)
     regiao = models.CharField('Região do Hub', max_length=200)
     sede = models.CharField('Sede do Hub', max_length=50)
@@ -20,7 +20,7 @@ class Hub(models.Model):
         return self.nome
     
 class Institution(models.Model):
-    foto = models.ImageField('Foto', upload_to='static/uploads/photos/institution')
+    foto = models.ImageField('Foto', upload_to='./static/uploads/photos/institution')
     nome = models.CharField('Nome da Instituição', max_length=200)
     email = models.CharField('E-mail', max_length=50)
     telefone = models.CharField('Telefone(Sem pontuação)', max_length=50)
@@ -35,7 +35,7 @@ class Institution(models.Model):
         return self.nome
     
 class Member(models.Model):
-    foto = models.ImageField('Foto', upload_to='static/uploads/photos/')
+    foto = models.ImageField('Foto', upload_to='./static/uploads/photos/')
     nome = models.CharField('Nome Completo', max_length=50)
     categoria = models.CharField('Função',max_length=50)
     bolsa = models.CharField('Tipo de Bolsa', max_length=100)
