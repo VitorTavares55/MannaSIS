@@ -50,13 +50,13 @@
             <td>
               <div class="d-flex align-items-center">
                 <img
-                    src="{{institution.foto}}"
+                    src="{{institution.photo}}"
                     alt=""
                     style="width: 45px; height: 45px"
                     class="rounded-circle"
                     />
                 <div class="ms-3">
-                  <p class="fw-bold mb-1">{{institution.nome}}</p>
+                  <p class="fw-bold mb-1">{{institution.name}}</p>
                 </div>
               </div>
             </td>
@@ -79,7 +79,7 @@
               <td>
                 <form method="POST" action="{% url 'instituicao' %}">
                 {% csrf_token %}
-                <input type='hidden' name='value' value="{{institution.nome}}">
+                <input type='hidden' name='value' value="{{institution.name}}">
                 <button type="submit"><h6 data-feather="book-open"></h6></button>
                 </form>
               </td>

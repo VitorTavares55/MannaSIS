@@ -26,7 +26,7 @@ class MemberList(ListView):
 def memberfilter(request):
     if request.method == 'POST':
         value = request.POST['search']
-        result = Member.objects.filter(nome__contains=value)
+        result = Member.objects.filter(name__contains=value)
         return render(request, 'pages/member-filter.html', {'result':result})
     else:
         return render(request, 'pages/member-list.html', {})
@@ -34,7 +34,7 @@ def memberfilter(request):
 def memberprofile(request):
   if request.method == 'POST':
         value = request.POST['value']
-        result = Member.objects.filter(nome__contains=value)
+        result = Member.objects.filter(name__contains=value)
         return render(request, 'pages/member-profile.html', {'result':result})
 
 class MemberCreate(CreateView):
@@ -55,8 +55,6 @@ class MemberDelete(DeleteView):
     success_url = reverse_lazy('membros')
 
 
-
-
 class HubList(ListView):
 	#login_url = reverse_lazy('login')
 	model = Hub
@@ -66,7 +64,7 @@ class HubList(ListView):
 def hubfilter(request):
     if request.method == 'POST':
         value = request.POST['search']
-        result = Hub.objects.filter(nome__contains=value)
+        result = Hub.objects.filter(name__contains=value)
         return render(request, 'pages/hub-filter.html', {'result':result})
     else:
         return render(request, 'pages/hub-list.html', {})
@@ -74,7 +72,7 @@ def hubfilter(request):
 def hubprofile(request):
   if request.method == 'POST':
         value = request.POST['value']
-        result = Hub.objects.filter(nome__contains=value)
+        result = Hub.objects.filter(name__contains=value)
         return render(request, 'pages/hub-profile.html', {'result':result})
 
 class HubCreate(CreateView):
@@ -96,8 +94,6 @@ class HubDelete(DeleteView):
 
 
 
-
-
 class InstitutionList(ListView):
 	#login_url = reverse_lazy('login')
 	model = Institution
@@ -107,7 +103,7 @@ class InstitutionList(ListView):
 def institutionfilter(request):
     if request.method == 'POST':
         value = request.POST['search']
-        result = Institution.objects.filter(nome__contains=value)
+        result = Institution.objects.filter(name__contains=value)
         return render(request, 'pages/institution-filter.html', {'result':result})
     else:
         return render(request, 'pages/institution-list.html', {})
@@ -115,7 +111,7 @@ def institutionfilter(request):
 def institutionprofile(request):
   if request.method == 'POST':
         value = request.POST['value']
-        result = Institution.objects.filter(nome__contains=value)
+        result = Institution.objects.filter(name__contains=value)
         return render(request, 'pages/institution-profile.html', {'result':result})
 
 class InstitutionCreate(CreateView):

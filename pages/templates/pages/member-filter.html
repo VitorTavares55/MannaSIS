@@ -51,28 +51,28 @@
             <td>
               <div class="d-flex align-items-center">
                 <img
-                    src="{{member.foto}}"
+                    src="{{member.photo}}"
                     alt=""
                     style="width: 45px; height: 45px"
                     class="rounded-circle"
                     />
                 <div class="ms-3">
-                  <p class="fw-bold mb-1">{{member.nome}}</p>
+                  <p class="fw-bold mb-1">{{member.name}}</p>
                   <p class="text-muted mb-0">{{member.email}}</p>
                 </div>
               </div>
             </td>
             <td>
-              <p class="fw-normal mb-1">{{member.categoria}}</p>
+              <p class="fw-normal mb-1">{{member.category}}</p>
             </td>
             <td>
-              <p class="fw-normal mb-1">{{member.instituicao}}</p>
+              <p class="fw-normal mb-1">{{member.institution}}</p>
             </td>
-            <td>{{member.bolsa}}</td>
+            <td>{{member.bag}}</td>
             <td>
               <form method="POST" action="{% url 'membro' %}">
               {% csrf_token %}
-              <input type='hidden' name='value' value="{{member.nome}}">
+              <input type='hidden' name='value' value="{{member.name}}">
               <button type="submit"><h6 data-feather="book-open"></h6></button>
               </form>
             </td>

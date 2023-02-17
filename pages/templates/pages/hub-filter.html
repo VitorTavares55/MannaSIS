@@ -49,25 +49,25 @@
             <td>
               <div class="d-flex align-items-center">
                 <img
-                    src="{{hub.foto}}"
+                    src="{{hub.photo}}"
                     alt=""
                     style="width: 45px; height: 45px"
                     class="rounded-circle"
                     />
                 <div class="ms-3">
-                  <p class="fw-bold mb-1">{{hub.nome}}</p>
+                  <p class="fw-bold mb-1">{{hub.name}}</p>
                 </div>
               </div>
             </td>
             <td>
-              <p class="fw-normal mb-1">{{hub.sede}}</p>
+              <p class="fw-normal mb-1">{{hub.headquarter}}</p>
             </td>
-            <p class="fw-normal mb-1">{{hub.representante}}</p>
+            <p class="fw-normal mb-1">{{hub.representative}}</p>
             <td>
               <td>
                 <form method="POST" action="{% url 'hub' %}">
                 {% csrf_token %}
-                <input type='hidden' name='value' value="{{hub.nome}}">
+                <input type='hidden' name='value' value="{{hub.name}}">
                 <button type="submit"><h6 data-feather="book-open"></h6></button>
                 </form>
               </td>
