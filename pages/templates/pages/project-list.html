@@ -11,17 +11,17 @@
   <div class="card mb-4 bg-primary">
   <header class="bg-primary text-center py-2 mb-2">
     <div class="container">
-      <h1 class="fw-light text-white">Instituições</h1>
+      <h1 class="fw-light text-white">Projetos</h1>
     </div>
   </header>
   </div>
 
   <!-- Search -->
   <div id="content">
-    <form class='form-inline' method="POST" action="{% url 'filtro-instituicao' %}">
+    <form class='form-inline' method="POST" action="{% url 'filtro-projeto' %}">
       {% csrf_token %}
       <div class="input-group">
-        <input type='text' name='search' class="form-control search-form " placeholder="Filtrar Instituições">
+        <input type='text' name='search' class="form-control search-form " placeholder="Filtrar Projetos">
         <span class="input-group-btn" style="width:39px">
           <button id="search-this" type="submit" class="pull-right btn btn-default search-btn">
               <i class="fa fa-search"></i>
@@ -39,37 +39,60 @@
         <thead class="bg-white">
           <tr>
             <th>Nome</th>
-            <th>Hub</th>
-            <th>Esfera</th>
+            <th>Tipo</th>
+            <th>Financiador</th>
           </tr>
         </thead>
         <tbody>
-          </tr>
-          {% for institution in result %}
           <tr>
             <td>
               <div class="d-flex align-items-center">
                 <img
-                    src="{{institution.photo}}"
+                    src="{% static 'img/plus.png' %}"
                     alt=""
                     style="width: 45px; height: 45px"
                     class="rounded-circle"
                     />
                 <div class="ms-3">
-                  <p class="fw-bold mb-1">{{institution.name}}</p>
+                  <a href="{% url 'cadastro-projeto' %}">
+                  <p class="fw-bold mb-1">Novo Projeto</p>
+                  <p class="text-muted mb-0">Cadastrar Novo Projeto</p></a>
                 </div>
               </div>
             </td>
             <td>
-              <p class="fw-normal mb-1">{{institution.hub}}</p>
             </td>
             <td>
-             {{institution.sphere}}
+            </td>
+            <td></td>
+            <td>
+            </td>
+          </tr>
+          {% for project in object_list %}
+          <tr>
+            <td>
+              <div class="d-flex align-items-center">
+                <img
+                    src="{{project.photo}}"
+                    alt=""
+                    style="width: 45px; height: 45px"
+                    class="rounded-circle"
+                    />
+                <div class="ms-3">
+                  <p class="fw-bold mb-1">{{project.name}}</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <p class="fw-normal mb-1">{{project.ptype}}</p>
+            </td>
+            <td>
+             {{project.financier}}
             <td>
               <td>
-                <form method="POST" action="{% url 'instituicao' %}">
+                <form method="POST" action="{% url 'projeto' %}">
                 {% csrf_token %}
-                <input type='hidden' name='value' value="{{institution.name}}">
+                <input type='hidden' name='value' value="{{project.name}}">
                 <button type="submit"><h6 data-feather="book-open"></h6></button>
                 </form>
               </td>

@@ -131,3 +131,42 @@ class InstitutionDelete(DeleteView):
     model = Institution
     success_url = reverse_lazy('instituicoes')
 
+
+
+class ProjectList(ListView):
+	#login_url = reverse_lazy('login')
+	model = Project
+	template_name = 'pages/project-list.html'
+	#success_url = reverse_lazy('index')
+
+def projectfilter(request):
+    if request.method == 'POST':
+        value = request.POST['search']
+        result = Project.objects.filter(name__contains=value)
+        return render(request, 'pages/project-filter.html', {'result':result})
+    else:
+        return render(request, 'pages/project-list.html', {})
+
+def projectprofile(request):
+  if request.method == 'POST':
+        value = request.POST['value']
+        result = Project.objects.filter(name__contains=value)
+        return render(request, 'pages/project-profile.html', {'result':result})
+
+class ProjectCreate(CreateView):
+    form_class = CustomProjectForm
+    template_name = 'pages/form.html'
+    model = Project
+    success_url = reverse_lazy('projetos')
+
+class ProjectUpdate(UpdateView):
+    form_class = CustomProjectForm
+    template_name = 'pages/form.html'
+    model = Project
+    success_url = reverse_lazy('projetos')
+
+class ProjectDelete(DeleteView):
+    template_name = 'pages/delete.html'
+    model = Project
+    success_url = reverse_lazy('projetos')
+

@@ -13,6 +13,13 @@ urlpatterns = [
     path('filtro-membro', views.memberfilter, name="filtro-membro"),
     path('membro', views.memberprofile, name="membro"),
 
+    path('hubs', HubList.as_view(), name="hubs"),
+    path('cadastro-hub', HubCreate.as_view(), name="cadastro-hub"),
+    path('editar-hub/<int:pk>/', HubUpdate.as_view(), name="editar-hub"),
+    path('deletar-hub/<int:pk>/', HubDelete.as_view(), name="deletar-hub"),
+    path('filtro-hub', views.hubfilter, name="filtro-hub"),
+    path('hub', views.hubprofile, name="hub"),
+
     path('instituicoes', InstitutionList.as_view(), name="instituicoes"),
     path('cadastro-instituicao', InstitutionCreate.as_view(), name="cadastro-instituicao"),
     path('editar-instituicao/<int:pk>/', InstitutionUpdate.as_view(), name="editar-instituicao"),
@@ -20,10 +27,10 @@ urlpatterns = [
     path('filtro-instituicao', views.institutionfilter, name="filtro-instituicao"),
     path('instituicao', views.institutionprofile, name="instituicao"),
 
-    path('hubs', HubList.as_view(), name="hubs"),
-    path('cadastro-hub', HubCreate.as_view(), name="cadastro-hub"),
-    path('editar-hub/<int:pk>/', HubUpdate.as_view(), name="editar-hub"),
-    path('deletar-hub/<int:pk>/', HubDelete.as_view(), name="deletar-hub"),
-    path('filtro-hub', views.hubfilter, name="filtro-hub"),
-    path('hub', views.hubprofile, name="hub"),
+    path('projetos', ProjectList.as_view(), name="projetos"),
+    path('cadastro-projeto', ProjectCreate.as_view(), name="cadastro-projeto"),
+    path('editar-projeto/<int:pk>/', ProjectUpdate.as_view(), name="editar-projeto"),
+    path('deletar-projeto/<int:pk>/', ProjectDelete.as_view(), name="deletar-projeto"),
+    path('filtro-projeto', views.projectfilter, name="filtro-projeto"),
+    path('projeto', views.projectprofile, name="projeto"),
 ]
