@@ -8,7 +8,6 @@ class Member(models.Model):
     photo = models.ImageField('Foto', upload_to='./static/uploads/photos/member')
     name = models.CharField('Nome Completo', max_length=50)
     category = models.CharField('Função',max_length=50)
-    bag = models.CharField('Tipo de Bolsa', max_length=100)
     institution = models.ForeignKey('Institution', on_delete=models.PROTECT, verbose_name='Instituição')
     email = models.CharField('E-mail', max_length=50)
     fone = models.CharField('Celular(Sem pontuação)', max_length=50)
@@ -21,7 +20,7 @@ class Member(models.Model):
     youtube = models.CharField('Youtube', max_length=50)
     cpf = models.CharField('CPF(Sem pontuação)', max_length=11, validators=[MinLengthValidator(11)])
     rg = models.CharField('RG(Sem pontuação)', max_length=50)
-    gender = models.CharField('Gênero:', choices=SEXO_CHOICES, default="Masculino", max_length=50)
+    gender = models.CharField('Gênero:', choices=GENDER_CHOICES, default="Masculino", max_length=50)
     formation = models.CharField('Formação', max_length=50)
     birthday = models.DateField('Data de Nascimento')
     address = models.CharField('Endereço', max_length=200)
@@ -63,7 +62,7 @@ class Institution(models.Model):
     fone = models.CharField('Telefone(Sem pontuação)', max_length=50)
     site = models.CharField('Site', max_length=50)
     hub = models.ForeignKey('Hub',on_delete=models.PROTECT)
-    sphere = models.CharField('Esfera', choices=ESFERA_CHOICES, default="Municipal", max_length=50)
+    sphere = models.CharField('Esfera', choices=SPHERE_CHOICES, default="Municipal", max_length=50)
     address = models.CharField('Endereço', max_length=200)
     amountStudents = models.IntegerField('Quantidade de Alunos Relacionados ao Manna')
     description= models.CharField('Descrição', max_length=2000)
@@ -82,3 +81,16 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Scholarship(models.Model):
+    member = models.ForeignKey('Member',on_delete=models.PROTECT, verbose_name="Membro")
+    stype = models.CharField('Tipo da Bolsa', max_length=100)
+    value = models.DecimalField('Valor da Bolsa', max_digits=8, decimal_places=2)
+    financier = models.CharField('Financiador', max_length=200)
+    dateStart = models.DateField('Data de Início da Bolsa')
+    dateEnd = models.DateField('Data de Finalização da Bolsa')
+    description = models.CharField('Descrição', max_length=2000)
+    relatory = models.FileField('Relatório', upload_to='./static/uploads/relatory/scholarship', blank=True)
+
+    def __str__(self):
+        return self.stype

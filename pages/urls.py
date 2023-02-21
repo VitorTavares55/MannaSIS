@@ -33,4 +33,11 @@ urlpatterns = [
     path('deletar-projeto/<int:pk>/', ProjectDelete.as_view(), name="deletar-projeto"),
     path('filtro-projeto', views.projectfilter, name="filtro-projeto"),
     path('projeto', views.projectprofile, name="projeto"),
+
+    path('bolsas', ScholarshipList.as_view(), name="bolsas"),
+    path('cadastro-bolsa', ScholarshipCreate.as_view(), name="cadastro-bolsa"),
+    path('editar-bolsa/<int:pk>/', ScholarshipUpdate.as_view(), name="editar-bolsa"),
+    path('deletar-bolsa/<int:pk>/', ScholarshipDelete.as_view(), name="deletar-bolsa"),
+    path('filtro-bolsa', views.scholarshipfilter, name="filtro-bolsa"),
+    path('bolsa', views.scholarshipprofile, name="bolsa"),
 ]

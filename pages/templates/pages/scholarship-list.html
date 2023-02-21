@@ -11,17 +11,17 @@
   <div class="card mb-4 bg-primary">
   <header class="bg-primary text-center py-2 mb-2">
     <div class="container">
-      <h1 class="fw-light text-white">Membros</h1>
+      <h1 class="fw-light text-white">Bolsas</h1>
     </div>
   </header>
   </div>
 
   <!-- Search -->
   <div id="content">
-    <form class='form-inline' method="POST" action="{% url 'filtro-membro' %}">
+    <form class='form-inline' method="POST" action="{% url 'filtro-bolsa' %}">
       {% csrf_token %}
       <div class="input-group">
-        <input type='text' name='search' class="form-control search-form " placeholder="Filtrar Membros ...">
+        <input type='text' name='search' class="form-control search-form " placeholder="Filtrar Bolsas">
         <span class="input-group-btn" style="width:39px">
           <button id="search-this" type="submit" class="pull-right btn btn-default search-btn">
               <i class="fa fa-search"></i>
@@ -38,9 +38,9 @@
       <table id ="table" class="table align-middle mb-0 bg-white">
         <thead class="bg-white">
           <tr>
-            <th>Nome</th>
-            <th>Função</th>
-            <th>Instituição</th>
+            <th>Membro</th>
+            <th>Tipo</th>
+            <th>Valor</th>
           </tr>
         </thead>
         <tbody>
@@ -54,45 +54,42 @@
                     class="rounded-circle"
                     />
                 <div class="ms-3">
-                  <a href="{% url 'cadastro-membro' %}">
-                  <p class="fw-bold mb-1">Novo Membro</p>
-                  <p class="text-muted mb-0">Cadastrar Novo Membro</p></a>
+                  <a href="{% url 'cadastro-bolsa' %}">
+                  <p class="fw-bold mb-1">Nova Bolsa</p>
+                  <p class="text-muted mb-0">Cadastrar Nova Bolsa</p></a>
                 </div>
               </div>
             </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td></td>
+            <td>
+            </td>
           </tr>
-          {% for member in object_list %}
-          {% if member.activity == True %}
+          {% for scholarship in object_list %}
           <tr>
             <td>
-              <div class="d-flex align-items-center">
-                <img
-                    src="{{member.photo}}"
-                    alt=""
-                    style="width: 45px; height: 45px"
-                    class="rounded-circle"
-                    />
-                <div class="ms-3">
-                  <p class="fw-bold mb-1">{{member.name}}</p>
-                  <p class="text-muted mb-0">{{member.email}}</p>
-                </div>
-              </div>
+              <p class="fw-normal mb-1">{{scholarship.member}}</p>
             </td>
             <td>
-              <p class="fw-normal mb-1">{{member.category}}</p>
+              <p class="fw-normal mb-1">{{scholarship.stype}}</p>
             </td>
             <td>
-              <p class="fw-normal mb-1">{{member.institution}}</p>
+              <p class="fw-normal mb-1">{{scholarship.value}}</p>
             </td>
             <td>
-              <form method="POST" action="{% url 'membro' %}">
-              {% csrf_token %}
-              <input type='hidden' name='value' value="{{member.id}}">
-              <button type="submit"><h6 data-feather="book-open"></h6></button>
-              </form>
+              <p class="fw-normal mb-1"></p>
             </td>
+              <td>
+                <form method="POST" action="{% url 'bolsa' %}">
+                {% csrf_token %}
+                <input type='hidden' name='value' value="{{scholarship.id}}">
+                <button type="submit"><h6 data-feather="book-open"></h6></button>
+                </form>
+              </td>
           </tr>
-          {% endif %}
         {% endfor %}
         </tbody>
       </table>

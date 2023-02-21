@@ -17,7 +17,6 @@
                       <h4 class="black">{{member.nane}}</h4>
                       <p class="text-secondary mb-1">{{member.category}}</p>
                       <p class="text-secondary mb-1">N° {{member.id}}</p>
-                      <p class="text-secondary mb-1">{{member.bag}}</p>
                       <p class="text-muted font-size-sm">{{member.institution}}</p>
                     </div>
                   </div>
@@ -82,6 +81,21 @@
                     </div>
                     <div class="col-sm-9 text-secondary">
                       {{member.rg}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Bolsa</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {% for scholarship in scholarship %}
+                      <form method="POST" action="{% url 'bolsa' %}">
+                        {% csrf_token %}
+                        <input type='hidden' name='value' value="{{scholarship.id}}">
+                        <button type="submit"><h6 data-feather="book-open"></h6></button>
+                        </form>
+                      {% endfor %}
                     </div>
                   </div>
                   <hr>

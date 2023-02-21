@@ -1,0 +1,103 @@
+{% extends 'pages/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<script src="https://unpkg.com/feather-icons"></script>
+<div class="container">
+    <div class="main-body">
+          <div class="row gutters-sm">
+            {% for scholarship in result %}
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Membro Associado</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{scholarship.member}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Tipo da Bolsa</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{scholarship.stype}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Valor da Bolsa</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     R${{scholarship.value}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Orgão Financiador</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{scholarship.financier}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Data de Início da Bolsa</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{scholarship.dateStart}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Data de Finalização da Bolsa</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{scholarship.dateEnd}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Descrição</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{scholarship.description}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Relatório</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      Assinado
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <a href="{% url 'editar-bolsa' scholarship.id %}" class="btn btn-warning btn-sm">Editar</a>
+                      <a href="{% url 'deletar-bolsa' scholarship.id %}" class="btn btn-danger btn-sm">Excluir</a>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+    <script>
+        feather.replace()
+        </script>
+{% endblock %}

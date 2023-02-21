@@ -4,7 +4,7 @@ from .models import *
 class CustomMemberForm(forms.ModelForm):
     class Meta:
         model = Member
-        fields = ['photo', 'name', 'category', 'bag', 'institution', 'email', 'fone', 'git', 'lattes', 'link', 'insta', 'twt', 'face', 'youtube', 'cpf', 'rg', 'gender', 'formation', 'birthday', 'address', 'project', 'award', 'bankName', 'bankNumber', 'agencyNumber', 'accountNumber', 'commitment', 'science', 'jobPlan', 'lgpd']
+        fields = ['photo', 'name', 'category', 'institution', 'email', 'fone', 'git', 'lattes', 'link', 'insta', 'twt', 'face', 'youtube', 'cpf', 'rg', 'gender', 'formation', 'birthday', 'address', 'project', 'award', 'bankName', 'bankNumber', 'agencyNumber', 'accountNumber', 'commitment', 'science', 'jobPlan', 'lgpd']
         widgets = {
             "birthday": forms.TextInput(attrs={'class':'form-control', 'type':'date'})
         }
@@ -24,3 +24,11 @@ class CustomProjectForm(forms.ModelForm):
         model = Project
         fields = ['photo', 'name', 'institution', 'ptype', 'financier', 'description', 'relatory']
 
+class CustomScholarshipForm(forms.ModelForm):
+    class Meta:
+        model = Scholarship
+        fields = ['member','stype', 'value', 'financier', 'dateStart', 'dateEnd', 'description', 'relatory']
+        widgets = {
+            "dateStart": forms.TextInput(attrs={'class':'form-control', 'type':'date'}),
+            "dateEnd": forms.TextInput(attrs={'class':'form-control', 'type':'date'})
+        }
