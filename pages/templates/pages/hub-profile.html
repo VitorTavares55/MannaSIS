@@ -41,7 +41,9 @@
                       <h6 class="mb-0">Instituições Afiliadas</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      {{hub.institution}}
+                      {% for institution in institutions %}
+                      {{institution.name}}.
+                      {% endfor %}
                     </div>
                   </div>
                   <hr>

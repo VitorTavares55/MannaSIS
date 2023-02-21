@@ -92,7 +92,7 @@
               <td>
                 <form method="POST" action="{% url 'projeto' %}">
                 {% csrf_token %}
-                <input type='hidden' name='value' value="{{project.name}}">
+                <input type='hidden' name='value' value="{{project.id}}">
                 <button type="submit"><h6 data-feather="book-open"></h6></button>
                 </form>
               </td>

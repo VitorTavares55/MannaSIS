@@ -34,7 +34,7 @@ def memberfilter(request):
 def memberprofile(request):
   if request.method == 'POST':
         value = request.POST['value']
-        result = Member.objects.filter(name__contains=value)
+        result = Member.objects.filter(id__iexact=value)
         return render(request, 'pages/member-profile.html', {'result':result})
 
 class MemberCreate(CreateView):
@@ -72,8 +72,9 @@ def hubfilter(request):
 def hubprofile(request):
   if request.method == 'POST':
         value = request.POST['value']
-        result = Hub.objects.filter(name__contains=value)
-        return render(request, 'pages/hub-profile.html', {'result':result})
+        result = Hub.objects.filter(id__iexact=value)
+        institutions = Institution.objects.filter(hub__id__iexact=value)
+        return render(request, 'pages/hub-profile.html', dict(result=result, institutions=institutions))
 
 class HubCreate(CreateView):
     form_class = CustomHubForm
@@ -111,7 +112,7 @@ def institutionfilter(request):
 def institutionprofile(request):
   if request.method == 'POST':
         value = request.POST['value']
-        result = Institution.objects.filter(name__contains=value)
+        result = Institution.objects.filter(name__iexact=value)
         return render(request, 'pages/institution-profile.html', {'result':result})
 
 class InstitutionCreate(CreateView):
@@ -150,8 +151,10 @@ def projectfilter(request):
 def projectprofile(request):
   if request.method == 'POST':
         value = request.POST['value']
-        result = Project.objects.filter(name__contains=value)
-        return render(request, 'pages/project-profile.html', {'result':result})
+        result = Project.objects.filter(id__iexact=value)
+        members = Member.objects.filter(project__id__iexact=value)
+        return render(request, 'pages/project-profile.html', dict(result = result, members = members))
+  
 
 class ProjectCreate(CreateView):
     form_class = CustomProjectForm

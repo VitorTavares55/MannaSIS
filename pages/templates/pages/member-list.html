@@ -90,7 +90,7 @@
             <td>
               <form method="POST" action="{% url 'membro' %}">
               {% csrf_token %}
-              <input type='hidden' name='value' value="{{member.name}}">
+              <input type='hidden' name='value' value="{{member.id}}">
               <button type="submit"><h6 data-feather="book-open"></h6></button>
               </form>
             </td>
