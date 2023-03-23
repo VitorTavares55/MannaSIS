@@ -1,0 +1,96 @@
+{% extends 'pages/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<script src="https://unpkg.com/feather-icons"></script>
+<div class="container">
+    <div class="main-body">
+          <div class="row gutters-sm">
+            {% for publication in result %}
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Título</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{publication.title}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Autores</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {% for member in members %}
+                      {{member.name}}.
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Tipo da Publicação</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{publication.publicationType}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Evento</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{publication.event}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Link do Evento</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{publication.linkEvent}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Descrição</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{publication.description}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Arquivo Publicado</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      Assinado
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <a href="{% url 'editar-publicacao' publication.id %}" class="btn btn-warning btn-sm">Editar</a>
+                      <a href="{% url 'deletar-publicacao' publication.id %}" class="btn btn-danger btn-sm">Excluir</a>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+    <script>
+        feather.replace()
+        </script>
+{% endblock %}

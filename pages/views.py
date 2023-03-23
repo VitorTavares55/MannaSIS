@@ -253,3 +253,85 @@ class ScholarshipDelete(DeleteView):
     template_name = 'pages/delete.html'
     model = Scholarship
     success_url = reverse_lazy('bolsas')
+
+#-------------------------------------------------------------------------#
+
+class PublicationList(ListView):
+	#login_url = reverse_lazy('login')
+	model = Publication
+	template_name = 'pages/publication-list.html'
+	#success_url = reverse_lazy('index')
+
+def publicationfilter(request):
+    if request.method == 'POST':
+        value = request.POST['search']
+        result = Publication.objects.filter(title__contains=value)
+        return render(request, 'pages/publication-filter.html', {'result':result})
+    else:
+        return render(request, 'pages/publication-list.html', {})
+
+def publicationprofile(request):
+  if request.method == 'POST':
+        value = request.POST['value']
+        result = Publication.objects.filter(id__iexact=value)
+        members = Member.objects.filter(publication__id__iexact=value)
+        return render(request, 'pages/publication-profile.html', dict(result = result, members = members))
+  
+
+class PublicationCreate(CreateView):
+    form_class = CustomPublicationForm
+    template_name = 'pages/form.html'
+    model = Publication
+    success_url = reverse_lazy('publicacoes')
+
+class PublicationUpdate(UpdateView):
+    form_class = CustomPublicationForm
+    template_name = 'pages/form.html'
+    model = Publication
+    success_url = reverse_lazy('publicacoes')
+
+class PublicationDelete(DeleteView):
+    template_name = 'pages/delete.html'
+    model = Publication
+    success_url = reverse_lazy('publicacoes')
+
+#-------------------------------------------------------------------------#
+
+class EventList(ListView):
+	#login_url = reverse_lazy('login')
+	model = Event
+	template_name = 'pages/event-list.html'
+	#success_url = reverse_lazy('index')
+
+def eventfilter(request):
+    if request.method == 'POST':
+        value = request.POST['search']
+        result = Event.objects.filter(title__contains=value)
+        return render(request, 'pages/event-filter.html', {'result':result})
+    else:
+        return render(request, 'pages/event-list.html', {})
+
+def eventprofile(request):
+  if request.method == 'POST':
+        value = request.POST['value']
+        result = Event.objects.filter(id__iexact=value)
+        members = Member.objects.filter(event__id__iexact=value)
+        return render(request, 'pages/event-profile.html', dict(result = result, members = members))
+  
+
+class EventCreate(CreateView):
+    form_class = CustomEventForm
+    template_name = 'pages/form.html'
+    model = Event
+    success_url = reverse_lazy('eventos')
+
+class EventUpdate(UpdateView):
+    form_class = CustomEventForm
+    template_name = 'pages/form.html'
+    model = Event
+    success_url = reverse_lazy('eventos')
+
+class EventDelete(DeleteView):
+    template_name = 'pages/delete.html'
+    model = Event
+    success_url = reverse_lazy('eventos')

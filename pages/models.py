@@ -77,7 +77,7 @@ class Project(models.Model):
     ptype = models.CharField('Tipo do Projeto', max_length=100)
     financier = models.CharField('Financiador', max_length=200)
     description = models.CharField('Descrição', max_length=2000)
-    relatory = models.FileField('Relatório', upload_to='./static/uploads/relatory/project', blank=True)
+    relatory = models.FileField('Relatório', upload_to='./static/uploads/relatory/project', blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -90,7 +90,32 @@ class Scholarship(models.Model):
     dateStart = models.DateField('Data de Início da Bolsa')
     dateEnd = models.DateField('Data de Finalização da Bolsa')
     description = models.CharField('Descrição', max_length=2000)
-    relatory = models.FileField('Relatório', upload_to='./static/uploads/relatory/scholarship', blank=True)
+    relatory = models.FileField('Relatório', upload_to='./static/uploads/relatory/scholarship', blank=True, null=True)
 
     def __str__(self):
         return self.stype
+    
+class Publication(models.Model):
+    member = models.ManyToManyField(Member, verbose_name="Membro")
+    title = models.CharField('Título', max_length=200)
+    publicationType = models.CharField('Tipo de Publicação', max_length=200)
+    event = models.CharField('Evento', max_length=200)
+    linkEvent = models.CharField('Link do Evento', max_length=200)
+    description = models.CharField('Descrição', max_length=2000)
+    pdf = models.FileField('PDF', upload_to='./static/uploads/publication')
+
+    def __str__(self):
+        return self.title
+    
+class Event(models.Model):
+    title = models.CharField('Título', max_length=200)
+    eventType = models.CharField('Tipo de Evento', max_length=200)
+    dateStart = models.DateField('Data de Início do Evento')
+    dateEnd = models.DateField('Data de Finalização do Evento', blank=True, null=True)
+    organization = models.ManyToManyField(Member, verbose_name="Organização")
+    address = models.CharField('Endereço', max_length=200, blank=True, null=True)
+    description = models.CharField('Descrição', max_length=2000)
+
+    def __str__(self):
+        return self.title
+

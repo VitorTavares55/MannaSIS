@@ -1,0 +1,104 @@
+{% extends 'pages/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<script src="https://unpkg.com/feather-icons"></script>
+<div class="container">
+    <div class="main-body">
+          <div class="row gutters-sm">
+            {% for event in result %}
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Título</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{event.title}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Organização</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {% for member in members %}
+                     {{member.name}}.
+                     {% endfor %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Tipo do Evento</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{event.eventType}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Data de Início</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{event.dateStart}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Data de Finalização</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {% if event.dataEnd is empty %}
+                      N/A
+                      {% else %}
+                      {{event.dataEnd}}
+                      {% endif %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Endereço</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {% if event.address is empty %}
+                      N/A
+                      {% else %}
+                      {{event.address}}
+                      {% endif %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Descrição</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{event.description}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <a href="{% url 'editar-evento' event.id %}" class="btn btn-warning btn-sm">Editar</a>
+                      <a href="{% url 'deletar-evento' event.id %}" class="btn btn-danger btn-sm">Excluir</a>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+    <script>
+        feather.replace()
+        </script>
+{% endblock %}

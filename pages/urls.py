@@ -40,4 +40,18 @@ urlpatterns = [
     path('deletar-bolsa/<int:pk>/', ScholarshipDelete.as_view(), name="deletar-bolsa"),
     path('filtro-bolsa', views.scholarshipfilter, name="filtro-bolsa"),
     path('bolsa', views.scholarshipprofile, name="bolsa"),
+
+    path('publicacoes', PublicationList.as_view(), name="publicacoes"),
+    path('cadastro-publicacao', PublicationCreate.as_view(), name="cadastro-publicacao"),
+    path('editar-publicacao/<int:pk>/', PublicationUpdate.as_view(), name="editar-publicacao"),
+    path('deletar-publicacao/<int:pk>/', PublicationDelete.as_view(), name="deletar-publicacao"),
+    path('filtro-publicacao', views.publicationfilter, name="filtro-publicacao"),
+    path('publicacao', views.publicationprofile, name="publicacao"),
+
+    path('eventos', EventList.as_view(), name="eventos"),
+    path('cadastro-evento', EventCreate.as_view(), name="cadastro-evento"),
+    path('editar-evento/<int:pk>/', EventUpdate.as_view(), name="editar-evento"),
+    path('deletar-evento/<int:pk>/', EventDelete.as_view(), name="deletar-evento"),
+    path('filtro-evento', views.eventfilter, name="filtro-evento"),
+    path('evento', views.eventprofile, name="evento"),
 ]

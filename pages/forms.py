@@ -32,3 +32,17 @@ class CustomScholarshipForm(forms.ModelForm):
             "dateStart": forms.TextInput(attrs={'class':'form-control', 'type':'date'}),
             "dateEnd": forms.TextInput(attrs={'class':'form-control', 'type':'date'})
         }
+
+class CustomPublicationForm(forms.ModelForm):
+    class Meta:
+        model = Publication
+        fields = ['member', 'title', 'publicationType', 'event', 'linkEvent', 'description', 'pdf']
+
+class CustomEventForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = ['title', 'eventType', 'dateStart', 'dateEnd', 'organization', 'address', 'description']
+        widgets = {
+            "dateStart": forms.TextInput(attrs={'class':'form-control', 'type':'date'}),
+            "dateEnd": forms.TextInput(attrs={'class':'form-control', 'type':'date'})
+        }
