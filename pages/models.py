@@ -25,7 +25,6 @@ class Member(models.Model):
     birthday = models.DateField('Data de Nascimento')
     address = models.CharField('Endereço', max_length=200)
     project = models.ForeignKey('Project', on_delete=models.PROTECT, verbose_name='Projeto')
-    award = models.CharField('Prêmio Associado', max_length=50)
     bankName = models.CharField('Nome do Banco', max_length=50)
     bankNumber = models.CharField('Número do Banco', max_length=50)
     agencyNumber = models.CharField('Número da Agência', max_length=50)
@@ -118,4 +117,40 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Certificate(models.Model):
+    name = models.CharField('Nome', max_length=200)
+    project = models.ForeignKey(Project,on_delete=models.PROTECT, verbose_name="Projeto", blank=True, null=True)
+    event = models.ForeignKey(Event,on_delete=models.PROTECT, verbose_name="Evento", blank=True, null=True)
+    cpf = models.CharField('CPF(Sem pontuação)', max_length=11, validators=[MinLengthValidator(11)])
+    hours = models.IntegerField('Carga Horária')
+    description = models.CharField('Descrição', max_length=2000)
+    code = models.CharField('Código', max_length=200)
+    pdf = models.FileField('Certificado', upload_to='./static/uploads/certificate')
 
+    def __str__(self):
+        return self.title
+
+class Award(models.Model):
+    title = models.CharField('Título', max_length=200)
+    member = models.ForeignKey(Member,on_delete=models.PROTECT, verbose_name="Membro")
+    atype = models.CharField('Tipo de Prêmio', max_length=100)
+    organization = models.CharField('Premiador', max_length=200)
+    description = models.CharField('Descrição', max_length=2000)
+    pdf = models.FileField('Prêmio', upload_to='./static/uploads/award')
+
+    def __str__(self):
+        return self.title
+    
+class Student(models.Model):
+    name = models.CharField('Nome', max_length=200)
+    gender = models.CharField('Gênero:', choices=GENDER_CHOICES, default="Masculino", max_length=50)
+    birthday = models.DateField('Data de Nascimento')
+    school = models.CharField('Escola', max_length=200)
+    mannaNumber = models.IntegerField('Número do Manna')
+    hub = models.ForeignKey('Hub',on_delete=models.PROTECT, blank=True, null=True)
+    project = models.ForeignKey(Project,on_delete=models.PROTECT, verbose_name="Projeto", blank=True, null=True)
+    event = models.ForeignKey(Event,on_delete=models.PROTECT, verbose_name="Evento", blank=True, null=True)
+
+    def __str__(self):
+        return self.name

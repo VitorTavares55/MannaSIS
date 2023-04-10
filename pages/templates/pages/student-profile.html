@@ -1,0 +1,103 @@
+{% extends 'pages/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<script src="https://unpkg.com/feather-icons"></script>
+<div class="container">
+    <div class="main-body">
+          <div class="row gutters-sm">
+            {% for student in result %}
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Nome</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{student.name}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Gênero</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{student.gender}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Nascimento</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{student.birthday}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Escola</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{student.school}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Número Manna</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{student.mannaNumber}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Hub</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{student.hub}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Projeto Associado</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{student.project}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Evento Associado</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{student.event}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <a href="{% url 'editar-aluno' student.id %}" class="btn btn-warning btn-sm">Editar</a>
+                      <a href="{% url 'deletar-aluno' student.id %}" class="btn btn-danger btn-sm">Excluir</a>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+    <script>
+        feather.replace()
+        </script>
+{% endblock %}

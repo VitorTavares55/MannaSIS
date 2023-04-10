@@ -1,0 +1,108 @@
+{% extends 'pages/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<script src="https://unpkg.com/feather-icons"></script>
+<section class="pricing py-5">
+<div class="container">
+  <div class="row">
+  <!-- Header -->
+  <div class="card mb-4 bg-primary">
+  <header class="bg-primary text-center py-2 mb-2">
+    <div class="container">
+      <h1 class="fw-light text-white">Certificados</h1>
+    </div>
+  </header>
+  </div>
+
+  <!-- Search -->
+  <div id="content">
+    <form class='form-inline' method="POST" action="{% url 'filtro-certificado' %}">
+      {% csrf_token %}
+      <div class="input-group">
+        <input type='text' name='search' class="form-control search-form " placeholder="Filtrar Certificados">
+        <span class="input-group-btn" style="width:39px">
+          <button id="search-this" type="submit" class="pull-right btn btn-default search-btn">
+              <i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+
+  <!-- Page Content -->
+  <div class="card mb-4 bg-white">
+  <div class="container">
+    <div class="row">
+      <table id ="table" class="table align-middle mb-0 bg-white">
+        <thead class="bg-white">
+          <tr>
+            <th>Nome</th>
+            <th>Carga Horária</th>
+            <th>Código</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center">
+                <img
+                    src="{% static 'img/plus.png' %}"
+                    alt=""
+                    style="width: 45px; height: 45px"
+                    class="rounded-circle"
+                    />
+                <div class="ms-3">
+                  <a href="{% url 'cadastro-certificado' %}">
+                  <p class="fw-bold mb-1">Novo Certificado</p>
+                  <p class="text-muted mb-0">Cadastrar Novo Certificado</p></a>
+                </div>
+              </div>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td></td>
+            <td>
+            </td>
+          </tr>
+          {% for certificate in object_list %}
+          <tr>
+            <td>
+              <p class="fw-normal mb-1">{{certificate.name}}</p>
+            </td>
+            <td>
+              <p class="fw-normal mb-1">{{certificate.hours}}</p>
+            </td>
+            <td>
+              <p class="fw-normal mb-1">{{certificate.code}}</p>
+            </td>
+            <td>
+              <p class="fw-normal mb-1"></p>
+            </td>
+              <td>
+                <form method="POST" action="{% url 'certificado' %}">
+                {% csrf_token %}
+                <input type='hidden' name='value' value="{{certificate.id}}">
+                <button type="submit"><h6 data-feather="book-open"></h6></button>
+                </form>
+              </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
+  </div>
+</div> 
+  
+ </div>
+</div>
+</section>
+<script>
+  feather.replace()
+  </script>
+        {% endblock %}

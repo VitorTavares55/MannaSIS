@@ -335,3 +335,123 @@ class EventDelete(DeleteView):
     template_name = 'pages/delete.html'
     model = Event
     success_url = reverse_lazy('eventos')
+
+#-------------------------------------------------------------------------#
+
+class CertificateList(ListView):
+	#login_url = reverse_lazy('login')
+	model = Certificate
+	template_name = 'pages/certificate-list.html'
+	#success_url = reverse_lazy('index')
+
+def certificatefilter(request):
+    if request.method == 'POST':
+        value = request.POST['search']
+        result = Certificate.objects.filter(member__contains=value)
+        return render(request, 'pages/certificate-filter.html', {'result':result})
+    else:
+        return render(request, 'pages/certificate-list.html', {})
+
+def certificateprofile(request):
+  if request.method == 'POST':
+        value = request.POST['value']
+        result = Certificate.objects.filter(id__iexact=value)
+        return render(request, 'pages/certificate-profile.html', dict(result = result))
+  
+
+class CertificateCreate(CreateView):
+    form_class = CustomCertificateForm
+    template_name = 'pages/form.html'
+    model = Certificate
+    success_url = reverse_lazy('certificados')
+
+class CertificateUpdate(UpdateView):
+    form_class = CustomCertificateForm
+    template_name = 'pages/form.html'
+    model = Certificate
+    success_url = reverse_lazy('certificados')
+
+class CertificateDelete(DeleteView):
+    template_name = 'pages/delete.html'
+    model = Certificate
+    success_url = reverse_lazy('certificados')
+
+#-------------------------------------------------------------------------#
+
+class AwardList(ListView):
+	#login_url = reverse_lazy('login')
+	model = Award
+	template_name = 'pages/award-list.html'
+	#success_url = reverse_lazy('index')
+
+def awardfilter(request):
+    if request.method == 'POST':
+        value = request.POST['search']
+        result = Award.objects.filter(member__contains=value)
+        return render(request, 'pages/award-filter.html', {'result':result})
+    else:
+        return render(request, 'pages/award-list.html', {})
+
+def awardprofile(request):
+  if request.method == 'POST':
+        value = request.POST['value']
+        result = Award.objects.filter(id__iexact=value)
+        return render(request, 'pages/award-profile.html', dict(result = result))
+  
+
+class AwardCreate(CreateView):
+    form_class = CustomAwardForm
+    template_name = 'pages/form.html'
+    model = Award
+    success_url = reverse_lazy('premios')
+
+class AwardUpdate(UpdateView):
+    form_class = CustomAwardForm
+    template_name = 'pages/form.html'
+    model = Award
+    success_url = reverse_lazy('premios')
+
+class AwardDelete(DeleteView):
+    template_name = 'pages/delete.html'
+    model = Award
+    success_url = reverse_lazy('premios')
+
+#-------------------------------------------------------------------------#
+
+class StudentList(ListView):
+	#login_url = reverse_lazy('login')
+	model = Student
+	template_name = 'pages/student-list.html'
+	#success_url = reverse_lazy('index')
+
+def studentfilter(request):
+    if request.method == 'POST':
+        value = request.POST['search']
+        result = Student.objects.filter(member__contains=value)
+        return render(request, 'pages/student-filter.html', {'result':result})
+    else:
+        return render(request, 'pages/student-list.html', {})
+
+def studentprofile(request):
+  if request.method == 'POST':
+        value = request.POST['value']
+        result = Student.objects.filter(id__iexact=value)
+        return render(request, 'pages/student-profile.html', dict(result = result))
+  
+
+class StudentCreate(CreateView):
+    form_class = CustomStudentForm
+    template_name = 'pages/form.html'
+    model = Student
+    success_url = reverse_lazy('alunos')
+
+class StudentUpdate(UpdateView):
+    form_class = CustomStudentForm
+    template_name = 'pages/form.html'
+    model = Student
+    success_url = reverse_lazy('alunos')
+
+class StudentDelete(DeleteView):
+    template_name = 'pages/delete.html'
+    model = Student
+    success_url = reverse_lazy('alunos')

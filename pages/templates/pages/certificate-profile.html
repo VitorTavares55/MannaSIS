@@ -1,0 +1,103 @@
+{% extends 'pages/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<script src="https://unpkg.com/feather-icons"></script>
+<div class="container">
+    <div class="main-body">
+          <div class="row gutters-sm">
+            {% for certificate in result %}
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Nome</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{certificate.name}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Projeto Associado</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{certificate.project}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Evento Associado</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{certificate.event}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">CPF</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{certificate.cpf}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Carga Horária</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{certificate.hours}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Descrição</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{certificate.description}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Código</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{certificate.code}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">PDF</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      Assinado
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <a href="{% url 'editar-certificado' certificate.id %}" class="btn btn-warning btn-sm">Editar</a>
+                      <a href="{% url 'deletar-certificado' certificate.id %}" class="btn btn-danger btn-sm">Excluir</a>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+    <script>
+        feather.replace()
+        </script>
+{% endblock %}

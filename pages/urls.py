@@ -54,4 +54,25 @@ urlpatterns = [
     path('deletar-evento/<int:pk>/', EventDelete.as_view(), name="deletar-evento"),
     path('filtro-evento', views.eventfilter, name="filtro-evento"),
     path('evento', views.eventprofile, name="evento"),
+
+    path('certificados', CertificateList.as_view(), name="certificados"),
+    path('cadastro-certificado', CertificateCreate.as_view(), name="cadastro-certificado"),
+    path('editar-certificado/<int:pk>/', CertificateUpdate.as_view(), name="editar-certificado"),
+    path('deletar-certificado/<int:pk>/', CertificateDelete.as_view(), name="deletar-certificado"),
+    path('filtro-certificado', views.certificatefilter, name="filtro-certificado"),
+    path('certificado', views.certificateprofile, name="certificado"),
+
+    path('premios', AwardList.as_view(), name="premios"),
+    path('cadastro-premio', AwardCreate.as_view(), name="cadastro-premio"),
+    path('editar-premio/<int:pk>/', AwardUpdate.as_view(), name="editar-premio"),
+    path('deletar-premio/<int:pk>/', AwardDelete.as_view(), name="deletar-premio"),
+    path('filtro-premio', views.awardfilter, name="filtro-premio"),
+    path('premio', views.awardprofile, name="premio"),
+
+    path('alunos', StudentList.as_view(), name="alunos"),
+    path('cadastro-aluno', StudentCreate.as_view(), name="cadastro-aluno"),
+    path('editar-aluno/<int:pk>/', StudentUpdate.as_view(), name="editar-aluno"),
+    path('deletar-aluno/<int:pk>/', StudentDelete.as_view(), name="deletar-aluno"),
+    path('filtro-aluno', views.studentfilter, name="filtro-aluno"),
+    path('aluno', views.studentprofile, name="aluno"),
 ]
