@@ -1,0 +1,11 @@
+{% extends 'pages/base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<a class="btn btn-primary btn-xl" href="{% url 'logout' %}">Sair</a>
+
+        {% endblock%}

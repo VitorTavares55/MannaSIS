@@ -1,0 +1,55 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>MannaSIS</title>
+	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+	<link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+	<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+				<div class="card border-0 shadow rounded-3 my-5">
+					<div class="card-body p-4 p-sm-5">
+
+						<!--Register-->
+						<div class="container py-5">
+							<h1>Registrar</h1>
+							<form method="POST">
+								{% csrf_token %}
+								{{ register_form|crispy }}
+								<button class="btn btn-primary" type="submit">Registrar</button>
+							</form>
+							</p>
+						</div>
+						<!--Register-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<footer class="py-4 bg-dark mt-auto-2">
+	<div class="container-fluid px-4">
+		<div class="d-flex align-items-center justify-content-between small">
+			<div class="text-muted">Manna Team 2022</div>
+			<div>
+				<a href="#">Privacy Policy</a>
+				&middot;
+				<a href="#">Terms &amp; Conditions</a>
+			</div>
+		</div>
+	</div>
+</footer>
+
+</html>

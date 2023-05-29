@@ -10,18 +10,14 @@ from .forms import *
 
 # Create your views here.
 
-class IndexView(TemplateView):
+class IndexView(LoginRequiredMixin, TemplateView):
+    login_url = reverse_lazy('login')
     template_name = "pages/index.html"
 
-class LoginView(TemplateView):
-    template_name = "pages/login.html"
-
-##class MemberList(LoginRequiredMixin, ListView):
-class MemberList(ListView):
-	#login_url = reverse_lazy('login')
+class MemberList(LoginRequiredMixin, ListView):
+	login_url = reverse_lazy('login')
 	model = Member
 	template_name = 'pages/member-list.html'
-	#success_url = reverse_lazy('index')
 
 def memberfilter(request):
     if request.method == 'POST':
@@ -38,30 +34,32 @@ def memberprofile(request):
         scholarship = Scholarship.objects.filter(member__id__iexact=value)
         return render(request, 'pages/member-profile.html', dict(result=result, scholarship=scholarship))
 
-class MemberCreate(CreateView):
+class MemberCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     form_class = CustomMemberForm
     template_name = 'pages/form.html'
     model = Member
     success_url = reverse_lazy('membros')
 
-class MemberUpdate(UpdateView):
+class MemberUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     form_class = CustomMemberForm
     template_name = 'pages/form.html'
     model = Member
     success_url = reverse_lazy('membros')
 
-class MemberDelete(DeleteView):
+class MemberDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Member
     success_url = reverse_lazy('membros')
 
 #-------------------------------------------------------------------------#
 
-class HubList(ListView):
-	#login_url = reverse_lazy('login')
+class HubList(LoginRequiredMixin, ListView):
+	login_url = reverse_lazy('login')
 	model = Hub
 	template_name = 'pages/hub-list.html'
-	#success_url = reverse_lazy('index')
 
 def hubfilter(request):
     if request.method == 'POST':
@@ -78,19 +76,22 @@ def hubprofile(request):
         institutions = Institution.objects.filter(hub__id__iexact=value)
         return render(request, 'pages/hub-profile.html', dict(result=result, institutions=institutions))
 
-class HubCreate(CreateView):
+class HubCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     form_class = CustomHubForm
     template_name = 'pages/form.html'
     model = Hub
     success_url = reverse_lazy('hubs')
 
-class HubUpdate(UpdateView):
+class HubUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     form_class = CustomHubForm
     template_name = 'pages/form.html'
     model = Hub
     success_url = reverse_lazy('hubs')
 
-class HubDelete(DeleteView):
+class HubDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Hub
     success_url = reverse_lazy('hubs')
@@ -98,10 +99,9 @@ class HubDelete(DeleteView):
 #-------------------------------------------------------------------------#
 
 class InstitutionList(ListView):
-	#login_url = reverse_lazy('login')
+	login_url = reverse_lazy('login')
 	model = Institution
 	template_name = 'pages/institution-list.html'
-	#success_url = reverse_lazy('index')
 
 def institutionfilter(request):
     if request.method == 'POST':
@@ -117,30 +117,32 @@ def institutionprofile(request):
         result = Institution.objects.filter(name__iexact=value)
         return render(request, 'pages/institution-profile.html', {'result':result})
 
-class InstitutionCreate(CreateView):
+class InstitutionCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     form_class = CustomInstitutionForm
     template_name = 'pages/form.html'
     model = Institution
     success_url = reverse_lazy('instituicoes')
 
-class InstitutionUpdate(UpdateView):
+class InstitutionUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     form_class = CustomInstitutionForm
     template_name = 'pages/form.html'
     model = Institution
     success_url = reverse_lazy('instituicoes')
 
-class InstitutionDelete(DeleteView):
+class InstitutionDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Institution
     success_url = reverse_lazy('instituicoes')
 
 #-------------------------------------------------------------------------#
 
-class ProjectList(ListView):
-	#login_url = reverse_lazy('login')
+class ProjectList(LoginRequiredMixin, ListView):
+	login_url = reverse_lazy('login')
 	model = Project
 	template_name = 'pages/project-list.html'
-	#success_url = reverse_lazy('index')
 
 def projectfilter(request):
     if request.method == 'POST':
@@ -158,69 +160,32 @@ def projectprofile(request):
         return render(request, 'pages/project-profile.html', dict(result = result, members = members))
   
 
-class ProjectCreate(CreateView):
+class ProjectCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     form_class = CustomProjectForm
     template_name = 'pages/form.html'
     model = Project
     success_url = reverse_lazy('projetos')
 
-class ProjectUpdate(UpdateView):
+class ProjectUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     form_class = CustomProjectForm
     template_name = 'pages/form.html'
     model = Project
     success_url = reverse_lazy('projetos')
 
-class ProjectDelete(DeleteView):
-    template_name = 'pages/delete.html'
-    model = Project
-    success_url = reverse_lazy('projetos')
-
-class ProjectList(ListView):
-	#login_url = reverse_lazy('login')
-	model = Project
-	template_name = 'pages/project-list.html'
-	#success_url = reverse_lazy('index')
-
-def projectfilter(request):
-    if request.method == 'POST':
-        value = request.POST['search']
-        result = Project.objects.filter(name__contains=value)
-        return render(request, 'pages/project-filter.html', {'result':result})
-    else:
-        return render(request, 'pages/project-list.html', {})
-
-def projectprofile(request):
-  if request.method == 'POST':
-        value = request.POST['value']
-        result = Project.objects.filter(id__iexact=value)
-        members = Member.objects.filter(project__id__iexact=value)
-        return render(request, 'pages/project-profile.html', dict(result = result, members = members))
-  
-
-class ProjectCreate(CreateView):
-    form_class = CustomProjectForm
-    template_name = 'pages/form.html'
-    model = Project
-    success_url = reverse_lazy('projetos')
-
-class ProjectUpdate(UpdateView):
-    form_class = CustomProjectForm
-    template_name = 'pages/form.html'
-    model = Project
-    success_url = reverse_lazy('projetos')
-
-class ProjectDelete(DeleteView):
+class ProjectDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Project
     success_url = reverse_lazy('projetos')
 
 #-------------------------------------------------------------------------#
 
-class ScholarshipList(ListView):
-	#login_url = reverse_lazy('login')
+class ScholarshipList(LoginRequiredMixin, ListView):
+	login_url = reverse_lazy('login')
 	model = Scholarship
 	template_name = 'pages/scholarship-list.html'
-	#success_url = reverse_lazy('index')
 
 def scholarshipfilter(request):
     if request.method == 'POST':
@@ -237,30 +202,32 @@ def scholarshipprofile(request):
         return render(request, 'pages/scholarship-profile.html', dict(result = result))
   
 
-class ScholarshipCreate(CreateView):
+class ScholarshipCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     form_class = CustomScholarshipForm
     template_name = 'pages/form.html'
     model = Scholarship
     success_url = reverse_lazy('bolsas')
 
-class ScholarshipUpdate(UpdateView):
+class ScholarshipUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     form_class = CustomScholarshipForm
     template_name = 'pages/form.html'
     model = Scholarship
     success_url = reverse_lazy('bolsas')
 
-class ScholarshipDelete(DeleteView):
+class ScholarshipDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Scholarship
     success_url = reverse_lazy('bolsas')
 
 #-------------------------------------------------------------------------#
 
-class PublicationList(ListView):
-	#login_url = reverse_lazy('login')
+class PublicationList(LoginRequiredMixin, ListView):
+	login_url = reverse_lazy('login')
 	model = Publication
 	template_name = 'pages/publication-list.html'
-	#success_url = reverse_lazy('index')
 
 def publicationfilter(request):
     if request.method == 'POST':
@@ -278,30 +245,32 @@ def publicationprofile(request):
         return render(request, 'pages/publication-profile.html', dict(result = result, members = members))
   
 
-class PublicationCreate(CreateView):
+class PublicationCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     form_class = CustomPublicationForm
     template_name = 'pages/form.html'
     model = Publication
     success_url = reverse_lazy('publicacoes')
 
-class PublicationUpdate(UpdateView):
+class PublicationUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     form_class = CustomPublicationForm
     template_name = 'pages/form.html'
     model = Publication
     success_url = reverse_lazy('publicacoes')
 
-class PublicationDelete(DeleteView):
+class PublicationDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Publication
     success_url = reverse_lazy('publicacoes')
 
 #-------------------------------------------------------------------------#
 
-class EventList(ListView):
-	#login_url = reverse_lazy('login')
+class EventList(LoginRequiredMixin, ListView):
+	login_url = reverse_lazy('login')
 	model = Event
 	template_name = 'pages/event-list.html'
-	#success_url = reverse_lazy('index')
 
 def eventfilter(request):
     if request.method == 'POST':
@@ -319,30 +288,32 @@ def eventprofile(request):
         return render(request, 'pages/event-profile.html', dict(result = result, members = members))
   
 
-class EventCreate(CreateView):
+class EventCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     form_class = CustomEventForm
     template_name = 'pages/form.html'
     model = Event
     success_url = reverse_lazy('eventos')
 
-class EventUpdate(UpdateView):
+class EventUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     form_class = CustomEventForm
     template_name = 'pages/form.html'
     model = Event
     success_url = reverse_lazy('eventos')
 
-class EventDelete(DeleteView):
+class EventDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Event
     success_url = reverse_lazy('eventos')
 
 #-------------------------------------------------------------------------#
 
-class CertificateList(ListView):
-	#login_url = reverse_lazy('login')
+class CertificateList(LoginRequiredMixin, ListView):
+	login_url = reverse_lazy('login')
 	model = Certificate
 	template_name = 'pages/certificate-list.html'
-	#success_url = reverse_lazy('index')
 
 def certificatefilter(request):
     if request.method == 'POST':
@@ -359,30 +330,32 @@ def certificateprofile(request):
         return render(request, 'pages/certificate-profile.html', dict(result = result))
   
 
-class CertificateCreate(CreateView):
+class CertificateCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     form_class = CustomCertificateForm
     template_name = 'pages/form.html'
     model = Certificate
     success_url = reverse_lazy('certificados')
 
-class CertificateUpdate(UpdateView):
+class CertificateUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     form_class = CustomCertificateForm
     template_name = 'pages/form.html'
     model = Certificate
     success_url = reverse_lazy('certificados')
 
-class CertificateDelete(DeleteView):
+class CertificateDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Certificate
     success_url = reverse_lazy('certificados')
 
 #-------------------------------------------------------------------------#
 
-class AwardList(ListView):
-	#login_url = reverse_lazy('login')
+class AwardList(LoginRequiredMixin, ListView):
+	login_url = reverse_lazy('login')
 	model = Award
 	template_name = 'pages/award-list.html'
-	#success_url = reverse_lazy('index')
 
 def awardfilter(request):
     if request.method == 'POST':
@@ -399,30 +372,32 @@ def awardprofile(request):
         return render(request, 'pages/award-profile.html', dict(result = result))
   
 
-class AwardCreate(CreateView):
+class AwardCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     form_class = CustomAwardForm
     template_name = 'pages/form.html'
     model = Award
     success_url = reverse_lazy('premios')
 
-class AwardUpdate(UpdateView):
+class AwardUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     form_class = CustomAwardForm
     template_name = 'pages/form.html'
     model = Award
     success_url = reverse_lazy('premios')
 
-class AwardDelete(DeleteView):
+class AwardDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Award
     success_url = reverse_lazy('premios')
 
 #-------------------------------------------------------------------------#
 
-class StudentList(ListView):
-	#login_url = reverse_lazy('login')
+class StudentList(LoginRequiredMixin, ListView):
+	login_url = reverse_lazy('login')
 	model = Student
 	template_name = 'pages/student-list.html'
-	#success_url = reverse_lazy('index')
 
 def studentfilter(request):
     if request.method == 'POST':
@@ -439,19 +414,22 @@ def studentprofile(request):
         return render(request, 'pages/student-profile.html', dict(result = result))
   
 
-class StudentCreate(CreateView):
+class StudentCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     form_class = CustomStudentForm
     template_name = 'pages/form.html'
     model = Student
     success_url = reverse_lazy('alunos')
 
-class StudentUpdate(UpdateView):
+class StudentUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     form_class = CustomStudentForm
     template_name = 'pages/form.html'
     model = Student
     success_url = reverse_lazy('alunos')
 
-class StudentDelete(DeleteView):
+class StudentDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Student
     success_url = reverse_lazy('alunos')
