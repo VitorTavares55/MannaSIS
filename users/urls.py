@@ -9,6 +9,4 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name="logout"),
     path('users/', StatusList.as_view(), name='user-list'),
     path('users/<int:pk>/update/', StatusUpdate.as_view(), name='user-update'),
-    
-
 ]

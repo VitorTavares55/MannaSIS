@@ -5,12 +5,12 @@ from django.db import models
 class Status(models.Model):
 
     class StatusType(models.Model):
-        DIRETORIA = "DIRETORIA"
-        LIDER_HUB = "LIDER DE HUB"
-        MEMBRO = "MEMBRO"
+        DIRETORIA = "Diretoria"
+        LIDER = "Liders"
+        MEMBRO = "Membro"
         STATUS = [
             (DIRETORIA, "Diretoria"),
-            (LIDER_HUB, "Lider de Hub"),
+            (LIDER, "Lider"),
             (MEMBRO, "Membro"),
         ]
     

@@ -53,10 +53,15 @@
                                     <td>
                                         <p class="fw-normal mb-1">{{status.user.email}}</p>
                                     </td>
+                                    {% if status.auth == True %}
                                     <td>
-                                        <input type="checkbox" class="form-check-input" {% if status.auth %} checked {%
-                                            else %} disabled {% endif %}>
+                                        <p class="fw-normal mb-1"> Sim </p>
                                     </td>
+                                    {% else %}
+                                    <td>
+                                        <p class="fw-normal mb-1"> Não </p>
+                                    </td>
+                                    {% endif %}
                                     <td>
                                         <p class="fw-normal mb-1">{{status.division}}</p>
                                     </td>
