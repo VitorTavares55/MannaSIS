@@ -5,20 +5,20 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-       <div class="container rounded bg-white mt-5 mb-5">
-        <div class="col-md-5">
-            <div class="p-3 py-5">
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-        
-            {{ form|crispy }}
-        
-            <button type="submit" class="btn btn-success">
-                       Cadastrar
-            </button>
-        </form>
-        </div>
-        </div>
-       </div>
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="col-md-5">
+        <div class="p-3 py-5">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
 
-        {% endblock%}
+                {{ form|crispy }}
+
+                <button type="submit" class="btn btn-success">
+                    Cadastrar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock%}

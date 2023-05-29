@@ -14,3 +14,9 @@ def register_request(request):
 		messages.error(request, "Unsuccessful registration. Invalid information.")
 	form = NewUserForm()
 	return render (request=request, template_name="users/register.html", context={"register_form":form})
+
+def is_header(user):
+    return user.groups.filter(name='Lider').exists()
+
+def is_director(user):
+    return user.groups.filter(name='Diretoria').exists()
