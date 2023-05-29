@@ -15,8 +15,8 @@ class Status(models.Model):
         ]
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    status_type = models.CharField(
+    auth = models.BooleanField(default=False)
+    division = models.CharField(
         max_length=50,
         choices=StatusType.STATUS, 
-        default=StatusType.MEMBRO,
-        verbose_name="Status")
+        default=StatusType.MEMBRO)
