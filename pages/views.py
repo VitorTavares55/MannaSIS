@@ -6,17 +6,21 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django import forms
 from django.shortcuts import get_object_or_404, render
 
-from users.views import is_director, is_header
+from users.views import is_director, is_header, is_auth
 from .models import *
 from .forms import *
 
 # Create your views here.
 
-class IndexView(LoginRequiredMixin, TemplateView):
+class IndexView(LoginRequiredMixin,  UserPassesTestMixin, TemplateView):
+    def test_func(self):
+        return is_auth(self.request.user)
     login_url = reverse_lazy('login')
     template_name = "pages/index.html"
 
-class MemberList(LoginRequiredMixin, ListView):
+class MemberList(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    def test_func(self):
+        return is_auth(self.request.user)
     login_url = reverse_lazy('login')
     model = Member
     template_name = 'pages/member-list.html'
@@ -38,7 +42,7 @@ def memberprofile(request):
 
 class MemberCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return ((is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomMemberForm
     template_name = 'pages/form.html'
@@ -47,7 +51,7 @@ class MemberCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class MemberUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return ((is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomMemberForm
     template_name = 'pages/form.html'
@@ -56,7 +60,7 @@ class MemberUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class MemberDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return ((is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Member
@@ -64,10 +68,12 @@ class MemberDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 #-------------------------------------------------------------------------#
 
-class HubList(LoginRequiredMixin, ListView):
-	login_url = reverse_lazy('login')
-	model = Hub
-	template_name = 'pages/hub-list.html'
+class HubList(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    def test_func(self):
+        return is_auth(self.request.user)
+    login_url = reverse_lazy('login')
+    model = Hub
+    template_name = 'pages/hub-list.html'
 
 def hubfilter(request):
     if request.method == 'POST':
@@ -86,7 +92,7 @@ def hubprofile(request):
 
 class HubCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def test_func(self):
-        return is_director(self.request.user)
+        return is_director(self.request.user) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomHubForm
     template_name = 'pages/form.html'
@@ -95,7 +101,7 @@ class HubCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class HubUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
-        return is_director(self.request.user)
+        return is_director(self.request.user) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomHubForm
     template_name = 'pages/form.html'
@@ -104,7 +110,7 @@ class HubUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class HubDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
-        return is_director(self.request.user)
+        return is_director(self.request.user) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Hub
@@ -112,10 +118,12 @@ class HubDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 #-------------------------------------------------------------------------#
 
-class InstitutionList(ListView):
-	login_url = reverse_lazy('login')
-	model = Institution
-	template_name = 'pages/institution-list.html'
+class InstitutionList(ListView, UserPassesTestMixin, LoginRequiredMixin):
+    def test_func(self):
+        return is_auth(self.request.user)
+    login_url = reverse_lazy('login')
+    model = Institution
+    template_name = 'pages/institution-list.html'
 
 def institutionfilter(request):
     if request.method == 'POST':
@@ -133,7 +141,7 @@ def institutionprofile(request):
 
 class InstitutionCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def test_func(self):
-        return is_director(self.request.user)
+        return is_director(self.request.user) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomInstitutionForm
     template_name = 'pages/form.html'
@@ -142,7 +150,7 @@ class InstitutionCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class InstitutionUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
-        return is_director(self.request.user)
+        return is_director(self.request.user) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomInstitutionForm
     template_name = 'pages/form.html'
@@ -151,7 +159,7 @@ class InstitutionUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class InstitutionDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
-        return is_director(self.request.user)
+        return is_director(self.request.user) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Institution
@@ -159,10 +167,12 @@ class InstitutionDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 #-------------------------------------------------------------------------#
 
-class ProjectList(LoginRequiredMixin, ListView):
-	login_url = reverse_lazy('login')
-	model = Project
-	template_name = 'pages/project-list.html'
+class ProjectList(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    def test_func(self):
+     return is_auth(self.request.user)
+    login_url = reverse_lazy('login')
+    model = Project
+    template_name = 'pages/project-list.html'
 
 def projectfilter(request):
     if request.method == 'POST':
@@ -182,7 +192,7 @@ def projectprofile(request):
 
 class ProjectCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return ((is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomProjectForm
     template_name = 'pages/form.html'
@@ -191,7 +201,7 @@ class ProjectCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class ProjectUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return ((is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomProjectForm
     template_name = 'pages/form.html'
@@ -200,7 +210,7 @@ class ProjectUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class ProjectDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Project
@@ -208,7 +218,9 @@ class ProjectDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 #-------------------------------------------------------------------------#
 
-class ScholarshipList(LoginRequiredMixin, ListView):
+class ScholarshipList(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    def test_func(self):
+        return is_auth(self.request.user)
     login_url = reverse_lazy('login')
     model = Scholarship
     template_name = 'pages/scholarship-list.html'
@@ -230,7 +242,7 @@ def scholarshipprofile(request):
 
 class ScholarshipCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomScholarshipForm
     template_name = 'pages/form.html'
@@ -239,7 +251,7 @@ class ScholarshipCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class ScholarshipUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomScholarshipForm
     template_name = 'pages/form.html'
@@ -248,7 +260,7 @@ class ScholarshipUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class ScholarshipDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Scholarship
@@ -256,10 +268,12 @@ class ScholarshipDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 #-------------------------------------------------------------------------#
 
-class PublicationList(LoginRequiredMixin, ListView):
-	login_url = reverse_lazy('login')
-	model = Publication
-	template_name = 'pages/publication-list.html'
+class PublicationList(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    def test_func(self):
+        return is_auth(self.request.user)
+    login_url = reverse_lazy('login')
+    model = Publication
+    template_name = 'pages/publication-list.html'
 
 def publicationfilter(request):
     if request.method == 'POST':
@@ -279,7 +293,7 @@ def publicationprofile(request):
 
 class PublicationCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomPublicationForm
     template_name = 'pages/form.html'
@@ -288,7 +302,7 @@ class PublicationCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class PublicationUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomPublicationForm
     template_name = 'pages/form.html'
@@ -297,7 +311,7 @@ class PublicationUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PublicationDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Publication
@@ -305,10 +319,12 @@ class PublicationDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 #-------------------------------------------------------------------------#
 
-class EventList(LoginRequiredMixin, ListView):
-	login_url = reverse_lazy('login')
-	model = Event
-	template_name = 'pages/event-list.html'
+class EventList(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    def test_func(self):
+        return is_auth(self.request.user)
+    login_url = reverse_lazy('login')
+    model = Event
+    template_name = 'pages/event-list.html'
 
 def eventfilter(request):
     if request.method == 'POST':
@@ -328,7 +344,7 @@ def eventprofile(request):
 
 class EventCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomEventForm
     template_name = 'pages/form.html'
@@ -337,7 +353,7 @@ class EventCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class EventUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomEventForm
     template_name = 'pages/form.html'
@@ -346,7 +362,7 @@ class EventUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class EventDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Event
@@ -354,10 +370,12 @@ class EventDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 #-------------------------------------------------------------------------#
 
-class CertificateList(LoginRequiredMixin, ListView):
-	login_url = reverse_lazy('login')
-	model = Certificate
-	template_name = 'pages/certificate-list.html'
+class CertificateList(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    def test_func(self):
+        return is_auth(self.request.user)
+    login_url = reverse_lazy('login')
+    model = Certificate
+    template_name = 'pages/certificate-list.html'
 
 def certificatefilter(request):
     if request.method == 'POST':
@@ -376,7 +394,7 @@ def certificateprofile(request):
 
 class CertificateCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomCertificateForm
     template_name = 'pages/form.html'
@@ -385,7 +403,7 @@ class CertificateCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class CertificateUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomCertificateForm
     template_name = 'pages/form.html'
@@ -394,7 +412,7 @@ class CertificateUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class CertificateDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Certificate
@@ -402,10 +420,12 @@ class CertificateDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 #-------------------------------------------------------------------------#
 
-class AwardList(LoginRequiredMixin, ListView):
-	login_url = reverse_lazy('login')
-	model = Award
-	template_name = 'pages/award-list.html'
+class AwardList(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    def test_func(self):
+        return is_auth(self.request.user)
+    login_url = reverse_lazy('login')
+    model = Award
+    template_name = 'pages/award-list.html'
 
 def awardfilter(request):
     if request.method == 'POST':
@@ -424,7 +444,7 @@ def awardprofile(request):
 
 class AwardCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomAwardForm
     template_name = 'pages/form.html'
@@ -433,7 +453,7 @@ class AwardCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class AwardUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomAwardForm
     template_name = 'pages/form.html'
@@ -442,7 +462,7 @@ class AwardUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class AwardDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Award
@@ -450,10 +470,12 @@ class AwardDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 #-------------------------------------------------------------------------#
 
-class StudentList(LoginRequiredMixin, ListView):
-	login_url = reverse_lazy('login')
-	model = Student
-	template_name = 'pages/student-list.html'
+class StudentList(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    def test_func(self):
+        return is_auth(self.request.user)
+    login_url = reverse_lazy('login')
+    model = Student
+    template_name = 'pages/student-list.html'
 
 def studentfilter(request):
     if request.method == 'POST':
@@ -472,7 +494,7 @@ def studentprofile(request):
 
 class StudentCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomStudentForm
     template_name = 'pages/form.html'
@@ -481,7 +503,7 @@ class StudentCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class StudentUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     form_class = CustomStudentForm
     template_name = 'pages/form.html'
@@ -490,7 +512,7 @@ class StudentUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class StudentDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
-        return is_director(self.request.user) or is_header(self.request.user)
+        return (is_director(self.request.user) or is_header(self.request.user)) and is_auth(self.request.user)
     login_url = reverse_lazy('login')
     template_name = 'pages/delete.html'
     model = Student
