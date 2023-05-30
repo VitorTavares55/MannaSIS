@@ -5,81 +5,83 @@
 {% block content %}
 <script src="https://unpkg.com/feather-icons"></script>
 <div class="container">
-    <div class="main-body">
-          <div class="row gutters-sm">
-            {% for award in result %}
-            <div class="col-md-8">
-              <div class="card mb-3">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Título</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                     {{award.title}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Membro Associado</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                     {{award.member}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Tipo do Prêmio</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                     {{award.atype}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Organização</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                     {{award.organization}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Descrição</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                     {{award.description}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">PDF</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      Assinado
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <a href="{% url 'editar-premio' award.id %}" class="btn btn-warning btn-sm">Editar</a>
-                      <a href="{% url 'deletar-premio' award.id %}" class="btn btn-danger btn-sm">Excluir</a>
-                    </div>
-                  </div>
-                  {% endfor %}
-                </div>
+  <div class="main-body">
+    <div class="row gutters-sm">
+      {% for award in result %}
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Título</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{award.title}}
               </div>
             </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Membro Associado</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{award.member}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Tipo do Prêmio</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{award.atype}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Organização</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{award.organization}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Descrição</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{award.description}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">PDF</h6>
+              </div>
+              {% if award.pdf or is_empty %}
+              <a href="{{award.pdf}}" download> Baixar PDF </a>
+              {% else %}
+              <h6 class="mb-0">Não Cadastrado</h6>
+              {% endif %}
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <a href="{% url 'editar-premio' award.id %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'deletar-premio' award.id %}" class="btn btn-danger btn-sm">Excluir</a>
+              </div>
+            </div>
+            {% endfor %}
           </div>
-
         </div>
+      </div>
     </div>
-    <script>
-        feather.replace()
-        </script>
+
+  </div>
+</div>
+<script>
+  feather.replace()
+</script>
 {% endblock %}

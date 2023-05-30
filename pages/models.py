@@ -31,8 +31,6 @@ class Member(models.Model):
     science = models.FileField('Termo de Ciência', upload_to='./static/uploads/terms/science', blank=True)
     jobPlan = models.FileField('Plano de Trabalho', upload_to='./static/uploads/terms/job', blank=True)
     lgpd = models.FileField('LGPD', upload_to='./static/uploads/terms/lgpd', blank=True)
-    acess = models.CharField(max_length=50)
-    activity = models.BooleanField(default=True)
 
     def __str__(self):
        return self.name

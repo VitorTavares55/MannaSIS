@@ -201,7 +201,11 @@
                 <h6 class="mb-0">Termo de Compromisso</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                Assinado
+                {% if member.commitment or is_empty %}
+                <a href="{{member.commitment}}" download> Baixar PDF </a>
+                {% else %}
+                <h6 class="mb-0">Não Cadastrado</h6>
+                {% endif %}
               </div>
             </div>
             <div class="row">
@@ -209,7 +213,11 @@
                 <h6 class="mb-0">Termo de Ciência</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                Assinado
+                {% if member.science or is_empty %}
+                <a href="{{member.science}}" download> Baixar PDF </a>
+                {% else %}
+                <h6 class="mb-0">Não Cadastrado</h6>
+                {% endif %}
               </div>
             </div>
             <div class="row">
@@ -217,7 +225,11 @@
                 <h6 class="mb-0">Plano de Trabalho</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                Assinado
+                {% if member.jobPlan or is_empty %}
+                <a href="{{member.jobPlan}}" download> Baixar PDF </a>
+                {% else %}
+                <h6 class="mb-0">Não Cadastrado</h6>
+                {% endif %}
               </div>
             </div>
             <div class="row">
@@ -225,16 +237,11 @@
                 <h6 class="mb-0">LGPD</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                Assinado
-              </div>
-            </div>
-            <hr>
-            <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Ultimo Acesso</h6>
-              </div>
-              <div class="col-sm-9 text-secondary">
-                21/11/2022
+                {% if member.lgpd or is_empty %}
+                <a href="{{member.lgpd}}" download> Baixar PDF </a>
+                {% else %}
+                <h6 class="mb-0">Não Cadastrado</h6>
+                {% endif %}
               </div>
             </div>
             <hr>
